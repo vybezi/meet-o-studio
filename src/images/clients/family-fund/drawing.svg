@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="20.181313mm"
+   height="7.0807161mm"
+   viewBox="0 0 20.181313 7.0807161"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <g
+     id="layer1"
+     transform="translate(-99.747913,-143.93333)">
+    <g
+       id="g183"
+       transform="translate(178.85833,191.55833)">
+      <g
+         id="g12-8-6"
+         transform="translate(-92.2758,-63.87513)">
+        <text
+           xml:space="preserve"
+           style="font-size:7.45393px;fill:#b05f1b;fill-opacity:1;stroke-width:0.621159"
+           x="13.252734"
+           y="22.022488"
+           id="text8-3-6"><tspan
+             id="tspan8-9-3"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'.New York';-inkscape-font-specification:'.New York';stroke-width:0.621159"
+             x="13.252734"
+             y="22.022488">Meet</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.2662px;font-family:'.New York';-inkscape-font-specification:'.New York';fill:#b05f1b;fill-opacity:1;stroke-width:0.855517"
+           x="27.683336"
+           y="21.083"
+           id="text9-0-1"><tspan
+             id="tspan9-5-6"
+             style="stroke-width:0.855517"
+             x="27.683336"
+             y="21.083">.</tspan></text>
+        <path
+           d="m 32.078329,18.781899 a 1.2684793,1.2684793 0 0 0 -1.268565,1.268565 1.2684793,1.2684793 0 0 0 1.268565,1.268366 1.2684793,1.2684793 0 0 0 1.268366,-1.268366 1.2684793,1.2684793 0 0 0 -1.268366,-1.268565 z m 0,0.654364 a 0.61404097,0.61404097 0 0 1 0.614001,0.614201 0.61404097,0.61404097 0 0 1 -0.614001,0.614001 0.61404097,0.61404097 0 0 1 -0.6142,-0.614001 0.61404097,0.61404097 0 0 1 0.6142,-0.614201 z"
+           style="fill:#b05f1b;stroke-width:0.0493304"
+           id="path11-2-2" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.814424px;font-family:'.New York';-inkscape-font-specification:'.New York';letter-spacing:0.603252px;fill:#b05f1b;fill-opacity:1;stroke-width:0.101804"
+           x="24.399694"
+           y="23.317001"
+           id="text11-2-1"><tspan
+             id="tspan11-7-9"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:0.814424px;font-family:'Bodoni 72';-inkscape-font-specification:'Bodoni 72 Bold';letter-spacing:0.603252px;stroke-width:0.101804"
+             x="24.399694"
+             y="23.317001">STUDIO.CO</tspan></text>
+      </g>
+      <rect
+         style="fill:#b05f1b;fill-opacity:1;stroke-width:0.0755951"
+         id="rect1-7"
+         width="3.3013794"
+         height="1.0335284"
+         x="-67.336624"
+         y="-47.625"
+         ry="0" />
+    </g>
+  </g>
+</svg>

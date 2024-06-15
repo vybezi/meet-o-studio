@@ -1,0 +1,24 @@
+@tailwind base;
+
+@font-face {
+  font-family: 'Mona Sans';
+  font-weight: 200 900;
+  font-display: block;
+  font-style: normal;
+  font-stretch: 75% 125%;
+  src: url('../fonts/Mona-Sans.var.woff2') format('woff2');
+}
+
+
+.clip-custom {
+  background-image: url(../images/landing-selfie.jpeg);
+  width: 100%;
+  height: 100%;
+  background-color: orange;
+  clip-path: url(#clip-path);
+}
+.canvas {
+  width: 200px;
+  height: 200px;
+  background-color: black;
+}
