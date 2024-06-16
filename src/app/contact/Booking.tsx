@@ -53,7 +53,7 @@ export function ContactForm() {
       event.preventDefault();
     try {
         const formData = new FormData(event.currentTarget);
-        const response = await fetch('/api/booking', {
+        const response = await fetch('/api/contact', {
         method: 'POST',
         body: JSON.stringify(Object.fromEntries(formData)),
         headers: {
@@ -62,7 +62,7 @@ export function ContactForm() {
         })
         if (response.ok) {
           const data = await response.json();
-          console.log(data.body);
+          console.log(data.message);
         } else {
             console.error('Failed to fetch data.');
         }
@@ -95,7 +95,7 @@ export function ContactForm() {
     }
     return (
       <FadeIn className="lg:order-last">
-        <form>
+        <form onSubmit={onSubmit}>
           <h2 className="font-display text-base font-semibold text-meet-primary">
             Work inquiries
           </h2>
