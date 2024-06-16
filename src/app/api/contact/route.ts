@@ -62,7 +62,7 @@ export async function POST(req: any, res: any) {
       var contactResult = contactHandlebar(body)
       const options = {
         from: process.env.MEET_EMAIL,
-        to: process.env.MEET_EMAIL,
+        to: process.env.EMAIL,
         subject: 'Meet Studio Co. Message',
         html: contactResult,
       }
