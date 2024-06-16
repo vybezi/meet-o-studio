@@ -68,10 +68,11 @@ export function ContactForm() {
           console.log(data.message);
           setSuccess(true);
         } else {
-            console.error('Failed to fetch data.');
+          setSuccess(false);
         }
     } catch (error) {
         console.error(error);
+        setSuccess(false);
     } finally{
 
     }
@@ -130,10 +131,10 @@ export function ContactForm() {
               </fieldset>
             </div>
           </div>
-          <Button type="submit" className={clsx('mt-10 px-6 transition-all ease-in-out delay-500 duration-500', isSuccess? 'bg-green-600' : '' )}>
-           {isSuccess? <svg className={clsx('w-5 fill-white transition-all ease-in-out delay-500 duration-500 transform rotate-180', isSuccess ? 'transform rotate-0' : '' )} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg> : 'Email Us'}
+          <Button type="submit" className={clsx('mt-10 px-6 transition ease-in-out delay-500 duration-500 bg-green-600', isSuccess ? 'bg-green-500' : '')}>
+            {isSuccess ? <svg className={clsx('w-5 fill-white ')} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg> : 'Email Us'}
           </Button>
-        </form>          
+        </form> 
       </FadeIn>
     )
   }

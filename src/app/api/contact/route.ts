@@ -45,12 +45,7 @@ export async function POST(req: any, res: any) {
         subject: 'Meet Studio Co. Message',
         html: contactResult,
       }
-      const response = transporter.sendMail(options)
-      return NextResponse.json({
-        message: 'Client email sent successfully',
-        data: 'hi',
-        response,
-      })
+      transporter.sendMail(options)
     })
     fs.readFile(studiofilePath, 'utf8', (err, data) => {
       if (err) {
@@ -66,16 +61,11 @@ export async function POST(req: any, res: any) {
         subject: 'Meet Studio Co. Message',
         html: contactResult,
       }
-      const response = transporter.sendMail(options)
-      return NextResponse.json({
-        message: 'Studio Email sent successfully',
-        data: 'hi',
-        response,
-      })
+      transporter.sendMail(options)
     })
     return NextResponse.json({
-      message: 'Data Failed to send',
-      data: ':(',
+      message: 'Email Sent',
+      data: ':)',
     })
   } catch (error) {
     console.error(error)
