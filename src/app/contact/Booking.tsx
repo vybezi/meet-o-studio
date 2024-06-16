@@ -4,8 +4,10 @@ import { Button } from "@/components/Button";
 import { FadeIn } from "@/components/FadeIn";
 import { Offices } from "@/components/Offices";
 import { SocialMedia } from "@/components/SocialMedia";
+import clsx from "clsx";
 import Link from "next/link";
-import { FormEvent, useId } from "react";
+import { FormEvent, useId, useState } from "react";
+
 
 function TextInput({
     label,
@@ -49,6 +51,7 @@ function TextInput({
   }
   
 export function ContactForm() {
+  const [isSuccess, setSuccess] = useState(false);
     async function onSubmit(event: FormEvent<HTMLFormElement>){
       event.preventDefault();
     try {
@@ -63,6 +66,7 @@ export function ContactForm() {
         if (response.ok) {
           const data = await response.json();
           console.log(data.message);
+          setSuccess(true);
         } else {
             console.error('Failed to fetch data.');
         }
@@ -74,25 +78,25 @@ export function ContactForm() {
       
     }
 
-    async function getAppointments(){
-      try {
-        const response = await fetch('/api/booking', {
-          method: 'GET',
-          headers: {
-            'content-type': 'application/json'
-          }
-        })
-        if (response.ok) {
-          const data = await response.json();
-          console.log(data);
-        } else {
-            console.error('Failed to fetch data.');
-        }
-      } catch (error) {
-          console.error(error);
-      } finally{
-      }
-    }
+    // async function getAppointments(){
+    //   try {
+    //     const response = await fetch('/api/booking', {
+    //       method: 'GET',
+    //       headers: {
+    //         'content-type': 'application/json'
+    //       }
+    //     })
+    //     if (response.ok) {
+    //       const data = await response.json();
+    //       console.log(data);
+    //     } else {
+    //         console.error('Failed to fetch data.');
+    //     }
+    //   } catch (error) {
+    //       console.error(error);
+    //   } finally{
+    //   }
+    // }
     return (
       <FadeIn className="lg:order-last">
         <form onSubmit={onSubmit}>
@@ -126,10 +130,10 @@ export function ContactForm() {
               </fieldset>
             </div>
           </div>
-          <Button type="submit" className="mt-10">
-            Email Us
+          <Button type="submit" className={clsx('mt-10 px-6 transition-all ease-in-out delay-500 duration-500', isSuccess? 'bg-green-600' : '' )}>
+           {isSuccess? <svg className={clsx('w-5 fill-white transition-all ease-in-out delay-500 duration-500 transform rotate-180', isSuccess ? 'transform rotate-0' : '' )} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg> : 'Email Us'}
           </Button>
-        </form>
+        </form>          
       </FadeIn>
     )
   }

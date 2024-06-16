@@ -42,7 +42,7 @@ export async function POST(req: any, res: any) {
       const options = {
         from: process.env.MEET_EMAIL,
         to: body.email,
-        subject: 'Contact Message',
+        subject: 'Meet Studio Co. Message',
         html: contactResult,
       }
       const response = transporter.sendMail(options)
@@ -63,7 +63,7 @@ export async function POST(req: any, res: any) {
       const options = {
         from: process.env.MEET_EMAIL,
         to: process.env.MEET_EMAIL,
-        subject: 'Contact Message',
+        subject: 'Meet Studio Co. Message',
         html: contactResult,
       }
       const response = transporter.sendMail(options)
