@@ -74,9 +74,7 @@ export function ContactForm() {
         console.error(error);
         setSuccess(false);
     } finally{
-
     }
-      
     }
 
     // async function getAppointments(){
