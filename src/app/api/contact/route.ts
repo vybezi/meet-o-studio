@@ -64,7 +64,7 @@ export async function POST(req: any, res: any) {
       transporter.sendMail(options)
     })
     return NextResponse.json({
-      message: 'Email Sent',
+      message: 'Email Sent No issues',
       data: ':)',
     })
   } catch (error) {
