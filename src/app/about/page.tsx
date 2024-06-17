@@ -121,7 +121,7 @@ function Services() {
   return (
     <>
       <SectionIntro
-        eyebrow="Studio Rental"
+        eyebrow="Book Studio"
         title="STUDIO RENTAL"
         className="mt-24 sm:mt-32 lg:mt-40"
       >
@@ -145,8 +145,8 @@ inspire creativity and ensure your project&apos;s success.
             </FadeIn>
           </div>
           <List className="mt-16 lg:mt-0 lg:w-1/2 lg:min-w-[33rem] lg:pl-4">
-            <ListItem title="Record">
-            Your Next Audio Project with Us
+            <ListItem title="Capture">
+            Your Next Project With Us.
             </ListItem>
             <ListItem title="Meet Studio.Co">
             is ready to host your next creative project. Reach out to us today to learn more or schedule a studio tour.
@@ -200,12 +200,8 @@ export default async function WhatToExpext() {
           </div>
           <FadeIn>
             <p className="mt-6 text-xl text-meet-secondary">
-            <strong>Welcome to Meet Studio.Co</strong>, Located in the heart of Mandeville, Meet Studio.Co is the perfect 
-            space for your next photo, video shoot podcast, or live stream. Studio.Co features a fully lit white 
-            Cyc wall, sound booth, editing bay, board room, and dressing room. <br/> <br/>
-            Meet with your team/clients in a collaborative space with an on-demand office and large screens 
-            for your idea board. You can enjoy your time in a large cozy space and our private dressing room 
-            will be ready for all your fabulous looks and glam team to set up and make you look like a million bucks
+            <strong>Welcome to Meet Studio.Co</strong>, your go-to destination for all your creative needs. Our versatile studio offers the ideal space for capturing stunning visuals, recording a podcast, or hosting a live stream.  <br/> <br/>
+            We are dedicated to providing a professional and welcoming space to bring your creative visions to life. We look forward to hosting you and helping you createsomething amazing.
             </p>
           </FadeIn>
         </FadeInStagger>

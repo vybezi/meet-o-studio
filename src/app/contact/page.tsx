@@ -15,11 +15,10 @@ function ContactDetails() {
   return (
     <FadeIn>
       <h2 className="font-display text-xl font-semibold text-meet-primary">
-        Meet Studio.co
+        Meet Studio.Co
       </h2>
       <p className="mt-6 text-base text-meet-secondary">
-        Prefer doing things in person? We don’t but we have to list our
-        addresses here for legal reasons.
+        Prefer doing things in person? We do too! Come see our studio, meet our team, and explore the possibilities for your next project. To arrange a tour, please send us an email. 
       </p>
 
       <Offices className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2" />
@@ -61,14 +60,14 @@ function ContactDetails() {
 
 export const metadata: Metadata = {
   title: 'Contact Us',
-  description: 'Let’s work together. We can’t wait to hear from you.',
+  description: 'Let’s work together. We can’t wait to meet you.',
 }
 
 export default function Contact() {
   return (
     <>
       <PageIntro eyebrow="Contact us" title="Let’s work together">
-        <p className='text-meet-secondary'>We can’t wait to hear from you.</p>
+        <p className='text-meet-secondary'>We can’t wait to meet you.</p>
       </PageIntro>
 
       <Container className="mt-24 sm:mt-32 lg:mt-40">
