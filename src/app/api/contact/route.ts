@@ -19,12 +19,12 @@ export async function POST(req: any, res: any) {
 
   try {
     const transporter = nodemailer.createTransport({
-      host: process.env.EMAIL_HOST,
+      host: 'smtp.zoho.com',
       port: 587,
       secure: false,
       auth: {
-        user: process.env.EMAIL_AUTH_USER,
-        pass: process.env.EMAIL_AUTH_PASS,
+        user: 'book@meetstudioco.com',
+        pass: 'GoMeet@1',
       },
     })
 
@@ -40,7 +40,7 @@ export async function POST(req: any, res: any) {
       const contactHandlebar = Handlebars.compile(data)
       var contactResult = contactHandlebar(body)
       const options = {
-        from: process.env.MEET_EMAIL,
+        from: 'book@meetstudioco.com',
         to: body.email,
         subject: 'Meet Studio Co. Message',
         html: contactResult,
@@ -56,8 +56,8 @@ export async function POST(req: any, res: any) {
       const contactHandlebar = Handlebars.compile(data)
       var contactResult = contactHandlebar(body)
       const options = {
-        from: process.env.MEET_EMAIL,
-        to: process.env.EMAIL,
+        from: 'book@meetstudioco.com',
+        to: 'meetstudio.co@gmail.com',
         subject: 'Meet Studio Co. Message',
         html: contactResult,
       }
