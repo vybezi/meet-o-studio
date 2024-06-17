@@ -16,7 +16,18 @@ export async function POST(req: any, res: any) {
     'src/templates',
     'studio-contact.html',
   )
+
   try {
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.zoho.com',
+      port: 587,
+      secure: false,
+      auth: {
+        user: 'book@meetstudioco.com',
+        pass: 'GoMeet@1',
+      },
+    })
+
     const body = await req.json()
     console.log(body)
 
@@ -34,14 +45,7 @@ export async function POST(req: any, res: any) {
         subject: 'Meet Studio Co. Message',
         html: contactResult,
       }
-
-      fetch('https://us-central1-meet-o-studio.cloudfunctions.net/sendEmail', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(options),
-      })
+      transporter.sendMail(options)
     })
     fs.readFile(studiofilePath, 'utf8', (err, data) => {
       if (err) {
@@ -57,13 +61,7 @@ export async function POST(req: any, res: any) {
         subject: 'Meet Studio Co. Message',
         html: contactResult,
       }
-      fetch('https://us-central1-meet-o-studio.cloudfunctions.net/sendEmail', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(options),
-      })
+      transporter.sendMail(options)
     })
     return NextResponse.json({
       message: 'Email Sent No issues',

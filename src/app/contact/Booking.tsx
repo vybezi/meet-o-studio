@@ -56,7 +56,7 @@ export function ContactForm() {
       event.preventDefault();
     try {
         const formData = new FormData(event.currentTarget);
-        const response = await fetch('/api/contact', {
+        const response = await fetch('https://us-central1-meet-o-studio.cloudfunctions.net/sendEmail', {
         method: 'POST',
         body: JSON.stringify(Object.fromEntries(formData)),
         headers: {
@@ -76,26 +76,6 @@ export function ContactForm() {
     } finally{
     }
     }
-
-    // async function getAppointments(){
-    //   try {
-    //     const response = await fetch('/api/booking', {
-    //       method: 'GET',
-    //       headers: {
-    //         'content-type': 'application/json'
-    //       }
-    //     })
-    //     if (response.ok) {
-    //       const data = await response.json();
-    //       console.log(data);
-    //     } else {
-    //         console.error('Failed to fetch data.');
-    //     }
-    //   } catch (error) {
-    //       console.error(error);
-    //   } finally{
-    //   }
-    // }
     return (
       <FadeIn className="lg:order-last">
         <form onSubmit={onSubmit}>
