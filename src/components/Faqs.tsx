@@ -45,7 +45,7 @@ export function FAQs(){
   <Border />
     <div className="cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
         <div className='flex justify-between items-center'>
-        <p className='text-xl font-bold text-meet-secondary my-5'>{title}</p>
+        <p className='text-xl font-bold text-meet-secondary my-5 w-3/4'>{title}</p>
         <svg className={`fill-meet-secondary size-6 transition ease-in-out delay-80 duration-500  ${isOpen ? 'transform rotate-180' : ''}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
             <path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/>
         </svg>

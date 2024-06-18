@@ -23,7 +23,7 @@ import imageLeslieAlexander from '@/images/team/leslie-alexander.jpg'
 import imageMichaelFoster from '@/images/team/michael-foster.jpg'
 import imageWhitneyFrancis from '@/images/team/whitney-francis.jpg'
 
-import landingImage from '@/images/gallery/landing.jpg'
+import landingImage from '@/images/gallery/LSP08321 (2)-min.jpg'
 
 import familyPhoto1 from '@/images/gallery/LSP04774-min.jpg'
 import familyPhoto2 from '@/images/gallery/LSP07807 (2)-min.jpg'
@@ -31,7 +31,7 @@ import familyPhoto3 from '@/images/gallery/LSP05538-min.jpg'
 import familyPhoto4 from '@/images/gallery/DSC03238 copy-min.jpg'
 import familyPhoto5 from '@/images/gallery/DSC01969 (2)-min.jpg'
 
-import portraitPhoto1 from '@/images/gallery/LSP08321 (2)-min.jpg'
+import portraitPhoto1 from '@/images/gallery/landing.jpg'
 import portraitPhoto2 from '@/images/gallery/LSP08372 (1)-min.jpg'
 import portraitPhoto3 from '@/images/gallery/LSP07571-min.jpg'
 import portraitPhoto4 from '@/images/gallery/LSP00729-min.jpg'
@@ -276,7 +276,7 @@ export default async function Home() {
       <div className='absolute right-[-18rem] top-[-10rem] lg:block hidden'>
       <FadeIn>
       <div className="group relative overflow-hidden rounded-3xl">
-          <PortraitImage className="h-[45rem] w-full" imageClassName='absolute left-[-12rem]' shape={0} src={landingImage} alt="Photography portrait"/>
+          <PortraitImage className="h-[45rem] w-full"  shape={0} src={landingImage} alt="Photography portrait"/>
         </div>
         </FadeIn>
       </div>

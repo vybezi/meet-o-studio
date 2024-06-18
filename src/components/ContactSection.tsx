@@ -15,13 +15,13 @@ export function ContactSection() {
         ))}
       </div>
       <Container>
-        <FadeIn className="-mx-6 px-6 py-10 sm:mx-0 sm:py-16 md:px-12">
+        <FadeIn className="-mx-6 px-6 py-4 sm:mx-0 sm:py-16 md:px-12">
           <div>
             <div className='flex flex-col items-center'>
-              <h2 className="font-display text-3xl font-bold text-white [text-wrap:balance] sm:text-4xl text-center">
+              <h2 className="font-display text-2xl font-bold text-white [text-wrap:balance] sm:text-4xl text-center">
                 Follow Us
               </h2>
-              <p className="text-white text-xl text-center my:2 sm:my-4">
+              <p className="text-white sm:text-xl text-center my-4">
                 Stay updated with our latest offerings and promotions by following us on social media.
               </p>
               <SocialMedia invert={true}/>

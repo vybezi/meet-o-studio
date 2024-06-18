@@ -29,8 +29,8 @@ function ContactDetails() {
         </h2>
         <dl className="mt-6 grid grid-cols-1 gap-8 text-sm sm:grid-cols-2">
           {[
-            ['Careers', 'book@meetstudioco.com'],
-            ['Press', 'https://www.meetstudioco.com/about'],
+            ['Bookings', 'book@meetstudioco.com'],
+            ['Press', 'meetstudioco@gmail.com'],
           ].map(([label, email]) => (
             <div key={email}>
               <dt className="font-semibold text-meet-secondary">{label}</dt>
