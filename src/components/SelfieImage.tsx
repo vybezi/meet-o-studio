@@ -22,10 +22,10 @@ export function SelfieImage({
     <div
       className={clsx(
         className,
-        'relative flex  w-full',
+        'relative flex w-full block h-full',
       )}
     >
-      <div className='border rounded-[2rem] overflow-hidden mb-8'>
+      <div className='border rounded-[6%] overflow-hidden mb-8 w-full'>
         <foreignObject width={width}>
                 <Image
                   alt=""
