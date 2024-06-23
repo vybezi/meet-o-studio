@@ -184,7 +184,7 @@ export default async function WhatToExpext() {
           <div className='flex justify-center items-center sm:flex-row gap-8 flex-col-reverse lg:justify-end lg:pr-12'>
             <div className='sm:w-1/2'>
               <FadeIn>
-                  <h1 className="font-display text-5xl font-bold tracking-tight text-meet-primary lg:leading-[6rem] [text-wrap:balance] lg:text-[5.5rem]">
+                  <h1 className="font-display text-6xl font-bold tracking-tight text-meet-primary md:text-6xl lg:leading-[6rem] [text-wrap:balance] lg:text-[5.5rem]">
                       ALL-WHITE STUDIO WITH EVERYTHING YOU NEED IN ONE PLACE
                   </h1>
               </FadeIn>
@@ -193,7 +193,6 @@ export default async function WhatToExpext() {
                 <FadeIn>
                 <SelfieImage 
                 src={landingSelfie} 
-                sizes="(min-width: 1024px) 41rem, 31rem"
                 className="justify-center lg:justify-end"/>
                 </FadeIn>
               </div>

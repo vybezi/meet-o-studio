@@ -24,6 +24,7 @@ import imageMichaelFoster from '@/images/team/michael-foster.jpg'
 import imageWhitneyFrancis from '@/images/team/whitney-francis.jpg'
 
 import landingImage from '@/images/gallery/LSP08321 (2)-min.jpg'
+import selfieImage from '@/images/LSP03612 (1).jpg'
 
 import familyPhoto1 from '@/images/gallery/LSP04774-min.jpg'
 import familyPhoto2 from '@/images/gallery/LSP07807 (2)-min.jpg'
@@ -47,6 +48,7 @@ import miniPhoto6 from '@/images/gallery/LSP07357 (1)-min.jpg'
 import { StylizedSection } from '@/components/StylizedSection'
 import clsx from 'clsx'
 import { PortraitImage } from '@/components/PortraitImage'
+import { SelfieImage } from '@/components/SelfieImage'
 
 function Culture() {
   return (
@@ -60,6 +62,7 @@ function Culture() {
           We are a group of like-minded people who share the same core values.
         </p>
       </SectionIntro>
+
       <Container className="mt-16">
         <GridList>
           <GridListItem title="Loyalty" invert>
@@ -258,6 +261,13 @@ export default async function Home() {
   return (
     <>
     <div className='relative'>
+    <div className='flex mt-24 justify-center lg:hidden block'>
+        <div className='w-2/3'>
+        <FadeIn>
+          <SelfieImage src={selfieImage} className="justify-center lg:justify-end"/>
+        </FadeIn>
+        </div>
+      </div>
       <PageIntro eyebrow="Overview" title="Welcome to Meet Studio.Co">
         <div className='text-meet-secondary'>
         <p>
@@ -278,7 +288,7 @@ export default async function Home() {
       <div className="group relative overflow-hidden rounded-3xl">
           <PortraitImage className="h-[45rem] w-full"  shape={0} src={landingImage} alt="Photography portrait"/>
         </div>
-        </FadeIn>
+      </FadeIn>
       </div>
     </div>
       <StylizedSection left={true}>
