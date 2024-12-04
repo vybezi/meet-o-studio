@@ -97,17 +97,6 @@ export function ContactForm() {
             />
             <TextInput label="Phone" type="tel" name="phone" autoComplete="tel" />
             <TextInput label="Message" name="message" />
-            <div className="border border-meet-secondary/30 px-6 py-8 first:rounded-t-2xl last:rounded-b-2xl">
-              <fieldset>
-                <legend className="text-base/6 text-meet-secondary">Budget</legend>
-                <div className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2">
-                  <RadioInput label="$25K – $50K" name="budget" value="25" />
-                  <RadioInput label="$50K – $100K" name="budget" value="50" />
-                  <RadioInput label="$100K – $150K" name="budget" value="100" />
-                  <RadioInput label="More than $150K" name="budget" value="150" />
-                </div>
-              </fieldset>
-            </div>
           </div>
           <Button type="submit" className={clsx('mt-10 px-6 transition ease-in-out delay-500 duration-500 bg-green-600', isSuccess ? 'bg-green-500' : '')}>
             {isSuccess ? <svg className={clsx('w-5 fill-white ')} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg> : 'Email Us'}
