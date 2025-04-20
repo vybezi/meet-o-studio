@@ -71,14 +71,16 @@ export default function Contact() {
       </PageIntro>
 
       <Container className="mt-24 sm:mt-32 lg:mt-40">
-        <div className="grid grid-cols-1 gap-x-8 gap-y-24 lg:grid-cols-2">
-          <ContactForm />
-          <ContactDetails />
-        </div>
-        <div className='w-full flex items-center justify-center mt-20'>
-        <Button href="https://app.acuityscheduling.com/schedule.php?owner=26926446" target="_blank" className='bg-meet-secondary'>
-            <h1 className='text-2xl p-1'>BOOK NOW</h1>
-          </Button>
+        <div className='flex flex-col-reverse sm:flex-col items-center justify-center'>
+          <div className="grid grid-cols-1 gap-x-8 gap-y-24 lg:grid-cols-2">
+            <ContactForm />
+            <ContactDetails />
+          </div>
+          <div className='w-full flex items-center justify-center mt-20'>
+          <Button href="https://app.acuityscheduling.com/schedule.php?owner=26926446" target="_blank" className='bg-meet-secondary'>
+              <h1 className='text-2xl p-1'>BOOK NOW</h1>
+            </Button>
+          </div>
         </div>
       </Container>
     </>
