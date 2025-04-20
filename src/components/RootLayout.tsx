@@ -62,6 +62,7 @@ function Header({
   invert?: boolean
 }) {
   let { logoHovered, setLogoHovered } = useContext(RootLayoutContext)!
+  const pathname = usePathname()
 
   return (
     <Container>
@@ -82,9 +83,11 @@ function Header({
             filled={logoHovered} />
         </Link>
         <div className="flex items-center gap-x-8">
-          <Button href="/contact" invert={invert}>
-            BOOK NOW
-          </Button>
+          {pathname !== '/contact' && (
+            <Button href="/contact" invert={invert}>
+              BOOK NOW
+            </Button>
+          )}
           <button
             ref={toggleRef}
             type="button"
