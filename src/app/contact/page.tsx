@@ -10,6 +10,7 @@ import { Offices } from '@/components/Offices'
 import { PageIntro } from '@/components/PageIntro'
 import { SocialMedia } from '@/components/SocialMedia'
 import { ContactForm } from './Booking'
+import { BookingForm } from '@/components/BookingForm'
 
 function ContactDetails() {
   return (
@@ -18,7 +19,9 @@ function ContactDetails() {
         Meet Studio.Co
       </h2>
       <p className="mt-6 text-base text-meet-secondary">
-        Prefer doing things in person? We do too! Come see our studio, meet our team, and explore the possibilities for your next project. To arrange a tour, please send us an email. 
+        Prefer doing things in person? We do too! Come see our studio, meet our
+        team, and explore the possibilities for your next project. To arrange a
+        tour, please send us an email.
       </p>
 
       <Offices className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2" />
@@ -57,7 +60,6 @@ function ContactDetails() {
   )
 }
 
-
 export const metadata: Metadata = {
   title: 'Contact Us',
   description: 'Let’s work together. We can’t wait to meet you.',
@@ -67,17 +69,16 @@ export default function Contact() {
   return (
     <>
       <PageIntro eyebrow="Contact us" title="Let’s work together">
-        <p className='text-meet-secondary'>We can’t wait to meet you.</p>
-        <Button href="https://app.acuityscheduling.com/schedule.php?owner=26926446" target="_blank" className='bg-meet-secondary mt-8'>
-          <h1 className='text-xl p-1'>BOOK NOW</h1>
-        </Button>
+        <p className="text-meet-secondary">We can’t wait to meet you.</p>
       </PageIntro>
 
-      <Container className="mt-24 sm:mt-32 lg:mt-40">
+      <Container>
+        <div className="flex flex-col-reverse items-center justify-center sm:mt-40 sm:flex-col">
           <div className="grid grid-cols-1 gap-x-8 gap-y-24 lg:grid-cols-2">
             <ContactForm />
             <ContactDetails />
           </div>
+        </div>
       </Container>
     </>
   )

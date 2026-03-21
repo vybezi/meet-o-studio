@@ -3,6 +3,7 @@ import { type Metadata } from 'next'
 import { RootLayout } from '@/components/RootLayout'
 
 import '@/styles/tailwind.css'
+import { AuthProvider } from '@/components/AuthProvider'
 
 export const metadata: Metadata = {
   title: {
@@ -15,7 +16,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="h-full bg-meet-primary text-base antialiased">
       <body className="flex min-h-full flex-col">
-        <RootLayout>{children}</RootLayout>
+        <RootLayout>
+          <AuthProvider>{children}</AuthProvider>
+        </RootLayout>
       </body>
     </html>
   )

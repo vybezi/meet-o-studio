@@ -17,9 +17,11 @@ export function Button({
   className = clsx(
     className,
     'inline-flex rounded-full px-4 py-1.5 text-sm font-semibold transition',
-    invert
-      ? 'bg-white text-meet-primary hover:bg-neutral-200'
-      : 'bg-meet-primary text-white hover:bg-neutral-800',
+    'disabled' in props && props.disabled
+      ? 'bg-gray-400 text-white'
+      : invert
+        ? 'bg-white text-meet-primary hover:bg-neutral-200'
+        : 'bg-meet-primary text-white hover:bg-neutral-800',
   )
 
   let inner = <span className="relative top-px">{children}</span>

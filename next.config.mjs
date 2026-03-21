@@ -13,6 +13,7 @@ import { unifiedConditional } from 'unified-conditional'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: ['@/shared/sdk/chronos'],
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
   // images: {
   //   domains: [

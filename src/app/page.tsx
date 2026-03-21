@@ -24,7 +24,6 @@ import imageMichaelFoster from '@/images/team/michael-foster.jpg'
 import imageWhitneyFrancis from '@/images/team/whitney-francis.jpg'
 
 import landingImage from '@/images/gallery/LSP08321 (2)-min.jpg'
-import selfieImage from '@/images/LSP03612 (1).jpg'
 
 import familyPhoto1 from '@/images/gallery/LSP04774-min.jpg'
 import familyPhoto2 from '@/images/gallery/LSP07807 (2)-min.jpg'
@@ -48,7 +47,6 @@ import miniPhoto6 from '@/images/gallery/LSP07357 (1)-min.jpg'
 import { StylizedSection } from '@/components/StylizedSection'
 import clsx from 'clsx'
 import { PortraitImage } from '@/components/PortraitImage'
-import { SelfieImage } from '@/components/SelfieImage'
 
 function Culture() {
   return (
@@ -62,7 +60,6 @@ function Culture() {
           We are a group of like-minded people who share the same core values.
         </p>
       </SectionIntro>
-
       <Container className="mt-16">
         <GridList>
           <GridListItem title="Loyalty" invert>
@@ -91,31 +88,31 @@ const images = [
         name: 'Leslie Alexander',
         role: 'Co-Founder / CEO',
         image: { src: familyPhoto1 },
-        landscape: false
+        landscape: false,
       },
       {
         name: 'Michael Foster',
         role: 'Co-Founder / CTO',
         image: { src: familyPhoto2 },
-        landscape: false
+        landscape: false,
       },
       {
         name: 'Dries Vincent',
         role: 'Partner & Business Relations',
         image: { src: familyPhoto3 },
-        landscape: false
+        landscape: false,
       },
       {
-        name: 'Dries Vincent',
+        name: 'Dries Vander',
         role: 'Partner & Business Relations',
         image: { src: familyPhoto4 },
-        landscape: true
+        landscape: true,
       },
       {
-        name: 'Dries Vincent',
+        name: 'Dries Wander',
         role: 'Partner & Business Relations',
         image: { src: familyPhoto5 },
-        landscape: false
+        landscape: false,
       },
     ],
   },
@@ -126,31 +123,31 @@ const images = [
         name: 'Chelsea Hagon',
         role: 'Senior Developer',
         image: { src: portraitPhoto1 },
-        landscape: false
+        landscape: false,
       },
       {
         name: 'Emma Dorsey',
         role: 'Senior Designer',
         image: { src: portraitPhoto2 },
-        landscape: false
+        landscape: false,
       },
       {
         name: 'Leonard Krasner',
         role: 'VP, User Experience',
         image: { src: portraitPhoto3 },
-        landscape: false
+        landscape: false,
       },
       {
         name: 'Blake Reid',
         role: 'Junior Copywriter',
         image: { src: portraitPhoto4 },
-        landscape: true
+        landscape: true,
       },
       {
         name: 'Kathryn Murphy',
         role: 'VP, Human Resources',
         image: { src: portraitPhoto5 },
-        landscape: false
+        landscape: false,
       },
     ],
   },
@@ -161,57 +158,65 @@ const images = [
         name: 'Chelsea Hagon',
         role: 'Senior Developer',
         image: { src: miniPhoto1 },
-        landscape: true
+        landscape: true,
       },
       {
         name: 'Emma Dorsey',
         role: 'Senior Designer',
         image: { src: miniPhoto2 },
-        landscape: false
+        landscape: false,
       },
       {
         name: 'Leonard Krasner',
         role: 'VP, User Experience',
         image: { src: miniPhoto3 },
-        landscape: false
+        landscape: false,
       },
       {
         name: 'Blake Reid',
         role: 'Junior Copywriter',
         image: { src: miniPhoto4 },
-        landscape: true
+        landscape: true,
       },
       {
         name: 'Kathryn Murphy',
         role: 'VP, Human Resources',
         image: { src: miniPhoto5 },
-        landscape: true
+        landscape: true,
       },
       {
-        name: 'Kathryn Murphy',
+        name: 'Kathryn Hungary',
         role: 'VP, Human Resources',
         image: { src: miniPhoto6 },
-        landscape: false
+        landscape: false,
       },
     ],
-  }
+  },
 ]
 
 function Gallery() {
   return (
-    <Container className="mt-24 sm:mt-32 lg:mt-40" id='gallery'>
+    <Container className="mt-24 sm:mt-32 lg:mt-40" id="gallery">
       <FadeIn>
-      <div className='w-full flex justify-center mb-6 sm: mb-8'>
-        <h1 style={{"fontFamily":"'.New York'",}} className=' block text-center max-w-5xl font-display text-5xl font-bold tracking-tight text-meet-secondary [text-wrap:balance] sm:text-7xl'>GALLERY</h1>
-      </div>
+        <div className="sm: mb-6 mb-8 flex w-full justify-center">
+          <h1
+            style={{ fontFamily: "'.New York'" }}
+            className=" block max-w-5xl text-center font-display text-5xl font-bold tracking-tight text-meet-secondary [text-wrap:balance] sm:text-7xl"
+          >
+            GALLERY
+          </h1>
+        </div>
       </FadeIn>
       <div className="space-y-24">
-        {images.map((group) => ( 
+        {images.map((group) => (
           <FadeInStagger key={group.title}>
             <Border as={FadeIn} />
             <div className="grid grid-cols-1 gap-6 pt-12 sm:pt-16 lg:grid-cols-4 xl:gap-8">
               <FadeIn>
-                <h2 className="font-display text-2xl font-semibold text-meet-secondary" style={{"fontFamily":"'.New York'",}}>
+                <h2
+                  className="font-display text-2xl font-semibold text-meet-secondary"
+                  style={{ fontFamily: "'.New York'" }}
+                >
                   {group.title}
                 </h2>
               </FadeIn>
@@ -221,7 +226,10 @@ function Gallery() {
                   className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-8"
                 >
                   {group.people.map((person) => (
-                    <li key={person.name} className={clsx(person.landscape && 'lg:col-span-2')}>
+                    <li
+                      key={person.name}
+                      className={clsx(person.landscape && 'lg:col-span-2')}
+                    >
                       <FadeIn>
                         <div className="group relative overflow-hidden rounded-3xl bg-neutral-100">
                           <Image
@@ -256,52 +264,64 @@ export const metadata: Metadata = {
     'Meet Studio.Co in Mandeville provides a versatile space for photo and video shoots, podcasts, and live streams, featuring a white Cyc wall, sound booth, and dressing room.',
 }
 
-
 export default async function Home() {
   return (
     <>
-    <div className='relative'>
-    <div className='flex mt-24 justify-center lg:hidden block'>
-        <div className='w-2/3'>
-        <FadeIn>
-          <SelfieImage src={selfieImage} className="justify-center lg:justify-end"/>
-        </FadeIn>
-        </div>
-      </div>
-      <PageIntro eyebrow="Overview" title="Welcome to Meet Studio.Co">
-        <div className='text-meet-secondary'>
-        <p>
-        Located in the heart of Mandeville, Meet Studio.Co is the perfect space for your next photo, video shoot podcast, or live stream. Studio.Co features a fully lit white Cyc wall, sound booth, editing bay, board room, and dressing room. 
-        </p>
-        <div className="mt-10 max-w-2xl space-y-6">
-          <p>
-          Meet with your team/clients in a collaborative space with an on-demand office and large screens for your idea board. You can enjoy your time in a large cozy space and our private dressing room will be ready for all your fabulous looks and glam team to set up and make you look like a million bucks. 
-          </p>
-          <p>
-          All sessions include pre-session consultations, time and talent, props and backgrounds, professional editing and retouching, & an online gallery.  So whether it’s sharing your new idea, an elaborate elopement, or growing your business, our goal is to provide a space where you can be completely yourself.
-          </p>
-        </div>
-        </div>
-      </PageIntro>
-      <div className='absolute right-[-18rem] top-[-10rem] lg:block hidden'>
-      <FadeIn>
-      <div className="group relative overflow-hidden rounded-3xl">
-          <PortraitImage className="h-[45rem] w-full"  shape={0} src={landingImage} alt="Photography portrait"/>
-        </div>
-      </FadeIn>
-      </div>
-    </div>
-      <StylizedSection left={true}>
-          <Container>
-            <FadeIn>
-            <div className='flex flex-col items-center'>
-              <h1 style={{"fontFamily":"'.New York'",}} className='mt-6 block text-center max-w-5xl font-display text-5xl font-bold tracking-tight text-white [text-wrap:balance] sm:text-7xl'>
-                ONE STUDIO INFINITE IMAGES <br/>TO CREATE
-              </h1>
-              <div className='size-12 sm:size-20 rounded-full border-4 sm:border-8 border-white bg-meet-primary mt-2 sm:mt-5'></div>
+      <div className="relative">
+        <PageIntro eyebrow="Overview" title="Welcome to Meet Studio.Co">
+          <div className="text-meet-secondary">
+            <p>
+              Located in the heart of Mandeville, Meet Studio.Co is the perfect
+              space for your next photo, video shoot podcast, or live stream.
+              Studio.Co features a fully lit white Cyc wall, sound booth,
+              editing bay, board room, and dressing room.
+            </p>
+            <div className="mt-10 max-w-2xl space-y-6">
+              <p>
+                Meet with your team/clients in a collaborative space with an
+                on-demand office and large screens for your idea board. You can
+                enjoy your time in a large cozy space and our private dressing
+                room will be ready for all your fabulous looks and glam team to
+                set up and make you look like a million bucks.
+              </p>
+              <p>
+                All sessions include pre-session consultations, time and talent,
+                props and backgrounds, professional editing and retouching, & an
+                online gallery. So whether it’s sharing your new idea, an
+                elaborate elopement, or growing your business, our goal is to
+                provide a space where you can be completely yourself.
+              </p>
             </div>
-            </FadeIn>
-          </Container>
+          </div>
+        </PageIntro>
+        <div className="absolute right-[-18rem] top-[-10rem] hidden lg:block">
+          <FadeIn>
+            <div className="group relative overflow-hidden rounded-3xl">
+              <PortraitImage
+                className="h-[45rem] w-full"
+                shape={0}
+                src={landingImage}
+                alt="Photography portrait"
+              />
+            </div>
+          </FadeIn>
+        </div>
+      </div>
+      <StylizedSection left={true}>
+        <Container>
+          <FadeIn>
+            <div className="flex flex-col items-center">
+              <h1
+                style={{ fontFamily: "'.New York'" }}
+                className="mt-6 block max-w-5xl text-center font-display text-5xl font-bold tracking-tight text-white [text-wrap:balance] sm:text-7xl"
+              >
+                ONE STUDIO INFINITE IMAGES <br />
+                TO CREATE
+              </h1>
+              <div className="mt-2 size-12 rounded-full border-4 border-white bg-meet-primary sm:mt-5 sm:size-20 sm:border-8"></div>
+            </div>
+          </FadeIn>
+        </Container>
       </StylizedSection>
 
       <Gallery />
@@ -310,5 +330,3 @@ export default async function Home() {
     </>
   )
 }
-
-

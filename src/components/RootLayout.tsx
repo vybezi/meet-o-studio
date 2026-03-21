@@ -23,7 +23,6 @@ import { SocialMedia } from '@/components/SocialMedia'
 import logo from '@/images/meet-co-logo.png'
 import Image from 'next/image'
 
-
 const RootLayoutContext = createContext<{
   logoHovered: boolean
   setLogoHovered: React.Dispatch<React.SetStateAction<boolean>>
@@ -62,7 +61,6 @@ function Header({
   invert?: boolean
 }) {
   let { logoHovered, setLogoHovered } = useContext(RootLayoutContext)!
-  const pathname = usePathname()
 
   return (
     <Container>
@@ -78,16 +76,12 @@ function Header({
             invert={invert}
             filled={logoHovered}
           /> */}
-          <Logo
-            invert={invert}
-            filled={logoHovered} />
+          <Logo invert={invert} filled={logoHovered} />
         </Link>
         <div className="flex items-center gap-x-8">
-          {pathname !== '/contact' && (
-            <Button href="/contact" invert={invert}>
-              BOOK NOW
-            </Button>
-          )}
+          <Button href="/book" className="relative z-40" invert={invert}>
+            BOOK NOW
+          </Button>
           <button
             ref={toggleRef}
             type="button"
@@ -152,7 +146,7 @@ function Navigation() {
       </NavigationRow>
       <NavigationRow>
         <NavigationItem href="/#gallery">Packages</NavigationItem>
-        <NavigationItem href="/">About Us</NavigationItem>
+        <NavigationItem href="/contact">Contact Us</NavigationItem>
       </NavigationRow>
     </nav>
   )

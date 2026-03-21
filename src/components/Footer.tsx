@@ -4,6 +4,7 @@ import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
 import { Logo } from '@/components/Logo'
 import { SocialMedia, socialMediaProfiles } from '@/components/SocialMedia'
+import { ArrowIcon } from './Icons'
 
 const navigation = [
   {
@@ -49,19 +50,6 @@ function Navigation() {
         ))}
       </ul>
     </nav>
-  )
-}
-
-function ArrowIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg viewBox="0 0 16 6" aria-hidden="true" {...props}>
-      <path
-        fill="currentColor"
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M16 3 10 .5v2H0v1h10v2L16 3Z"
-      />
-    </svg>
   )
 }
 
