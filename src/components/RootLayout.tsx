@@ -79,7 +79,7 @@ function Header({
           <Logo invert={invert} filled={logoHovered} />
         </Link>
         <div className="flex items-center gap-x-8">
-          <Button href="/book" className="relative z-40" invert={invert}>
+          <Button href="/contact" className="relative z-40" invert={invert}>
             BOOK NOW
           </Button>
           <button

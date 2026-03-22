@@ -70,6 +70,15 @@ export default function Contact() {
     <>
       <PageIntro eyebrow="Contact us" title="Let’s work together">
         <p className="text-meet-secondary">We can’t wait to meet you.</p>
+
+        <Button
+          href="https://app.acuityscheduling.com/schedule.php?owner=26926446"
+          target="_blank"
+          className="mt-8 bg-meet-secondary"
+        >
+          {' '}
+          <h1 className="p-1 text-xl">BOOK NOW</h1>
+        </Button>
       </PageIntro>
 
       <Container>
