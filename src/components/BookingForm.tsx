@@ -1029,7 +1029,7 @@ export function BookingForm() {
             Booking Confirmed!
           </h2>
           <p className="mb-4 text-meet-secondary/70">
-            We've sent a confirmation email to {formData.email} with all the
+            We&apos;ve sent a confirmation email to {formData.email} with all the
             details.
           </p>
 

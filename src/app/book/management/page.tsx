@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
@@ -14,6 +14,14 @@ import { format } from 'date-fns'
 import { BookingWithDetails, ServiceAddon } from '@/shared/sdk/chronos'
 
 export default function BookingManagementPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <BookingManagementContent />
+    </Suspense>
+  )
+}
+
+function BookingManagementContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const token = searchParams.get('token')

@@ -56,7 +56,7 @@ export default function Book() {
             </span>
             <p>Turnaround time for edited images is 5-7 days</p>
             <p>
-              Call or message us directly, and we'll be happy to answer your
+              Call or message us directly, and we&apos;ll be happy to answer your
               questions, provide more detail, and discuss pricing.
             </p>
             <p>
