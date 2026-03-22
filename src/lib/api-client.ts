@@ -20,7 +20,9 @@ export const getTenantId = (): string => {
 
 // Get base URL from environment
 export const getBaseUrl = (): string => {
-  return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'
+  return (
+    process.env.NEXT_PUBLIC_API_URL || 'https://chronos-api.silascoley.com/'
+  )
 }
 
 // Get auth token from localStorage
