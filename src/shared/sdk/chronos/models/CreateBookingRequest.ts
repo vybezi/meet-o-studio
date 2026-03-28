@@ -18,6 +18,7 @@ export class CreateBookingRequest {
     'bookingDate': string;
     'bookingTime': string;
     'currency': string;
+    'frontendUrl'?: string | null;
     'guestEmail'?: string | null;
     'guestName'?: string | null;
     'guestPhone'?: string | null;
@@ -53,6 +54,12 @@ export class CreateBookingRequest {
         {
             "name": "currency",
             "baseName": "currency",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "frontendUrl",
+            "baseName": "frontend_url",
             "type": "string",
             "format": ""
         },

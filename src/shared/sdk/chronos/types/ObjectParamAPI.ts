@@ -6,12 +6,17 @@ import { Availability } from '../models/Availability';
 import { AvailabilityCheckResponse } from '../models/AvailabilityCheckResponse';
 import { AvailabilityResponse } from '../models/AvailabilityResponse';
 import { AvailabilitySlot } from '../models/AvailabilitySlot';
+import { AvailableSlot } from '../models/AvailableSlot';
 import { Booking } from '../models/Booking';
 import { BookingResponse } from '../models/BookingResponse';
 import { BookingWithDetails } from '../models/BookingWithDetails';
 import { BulkAvailabilityRequest } from '../models/BulkAvailabilityRequest';
 import { BulkServiceRequest } from '../models/BulkServiceRequest';
 import { BulkServiceResponse } from '../models/BulkServiceResponse';
+import { CalendarConnectionResponse } from '../models/CalendarConnectionResponse';
+import { CalendarConnectionStatus } from '../models/CalendarConnectionStatus';
+import { CalendarTokenRefreshResponse } from '../models/CalendarTokenRefreshResponse';
+import { CalendarUser } from '../models/CalendarUser';
 import { Category } from '../models/Category';
 import { CategoryWithServices } from '../models/CategoryWithServices';
 import { ChangePasswordRequest } from '../models/ChangePasswordRequest';
@@ -24,9 +29,12 @@ import { CreateNewCategoryRequest } from '../models/CreateNewCategoryRequest';
 import { CreateNewServiceRequest } from '../models/CreateNewServiceRequest';
 import { CreateNewUserRequest } from '../models/CreateNewUserRequest';
 import { GenerateSlotsRequest } from '../models/GenerateSlotsRequest';
+import { GoogleAuthUrl } from '../models/GoogleAuthUrl';
+import { GoogleOAuthCallback } from '../models/GoogleOAuthCallback';
 import { LoginRequest } from '../models/LoginRequest';
 import { LoginResponse } from '../models/LoginResponse';
 import { MagicLinkResponse } from '../models/MagicLinkResponse';
+import { NewAvailability } from '../models/NewAvailability';
 import { NewBooking } from '../models/NewBooking';
 import { NewCategory } from '../models/NewCategory';
 import { NewService } from '../models/NewService';
@@ -1126,6 +1134,160 @@ export class ObjectBookingsApi {
      */
     public updateBookingStatus(param: BookingsApiUpdateBookingStatusRequest, options?: ConfigurationOptions): Promise<BookingResponse> {
         return this.api.updateBookingStatus(param.id, param.updateStatusRequest,  options).toPromise();
+    }
+
+}
+
+import { ObservableCalendarApi } from "./ObservableAPI";
+import { CalendarApiRequestFactory, CalendarApiResponseProcessor} from "../apis/CalendarApi";
+
+export interface CalendarApiDisconnectCalendarRequest {
+}
+
+export interface CalendarApiGetCalendarStatusRequest {
+}
+
+export interface CalendarApiGetCalendarUsersHandlerRequest {
+}
+
+export interface CalendarApiGetGoogleAuthUrlRequest {
+    /**
+     * Frontend URL to redirect back to after OAuth
+     * Defaults to: undefined
+     * @type string
+     * @memberof CalendarApigetGoogleAuthUrl
+     */
+    redirectUri: string
+}
+
+export interface CalendarApiHandleGoogleOAuthCallbackRequest {
+    /**
+     * Authorization code
+     * Defaults to: undefined
+     * @type string
+     * @memberof CalendarApihandleGoogleOAuthCallback
+     */
+    code: string
+    /**
+     * State parameter with user, tenant, and redirect info
+     * Defaults to: undefined
+     * @type string
+     * @memberof CalendarApihandleGoogleOAuthCallback
+     */
+    state: string
+    /**
+     * Granted scopes
+     * Defaults to: undefined
+     * @type string
+     * @memberof CalendarApihandleGoogleOAuthCallback
+     */
+    scope: string
+}
+
+export interface CalendarApiRefreshCalendarTokenHandlerRequest {
+}
+
+export class ObjectCalendarApi {
+    private api: ObservableCalendarApi
+
+    public constructor(configuration: Configuration, requestFactory?: CalendarApiRequestFactory, responseProcessor?: CalendarApiResponseProcessor) {
+        this.api = new ObservableCalendarApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Disconnect Google Calendar
+     * @param param the request object
+     */
+    public disconnectCalendarWithHttpInfo(param: CalendarApiDisconnectCalendarRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CalendarConnectionResponse>> {
+        return this.api.disconnectCalendarWithHttpInfo( options).toPromise();
+    }
+
+    /**
+     * Disconnect Google Calendar
+     * @param param the request object
+     */
+    public disconnectCalendar(param: CalendarApiDisconnectCalendarRequest = {}, options?: ConfigurationOptions): Promise<CalendarConnectionResponse> {
+        return this.api.disconnectCalendar( options).toPromise();
+    }
+
+    /**
+     * Check if Google Calendar is connected
+     * @param param the request object
+     */
+    public getCalendarStatusWithHttpInfo(param: CalendarApiGetCalendarStatusRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CalendarConnectionStatus>> {
+        return this.api.getCalendarStatusWithHttpInfo( options).toPromise();
+    }
+
+    /**
+     * Check if Google Calendar is connected
+     * @param param the request object
+     */
+    public getCalendarStatus(param: CalendarApiGetCalendarStatusRequest = {}, options?: ConfigurationOptions): Promise<CalendarConnectionStatus> {
+        return this.api.getCalendarStatus( options).toPromise();
+    }
+
+    /**
+     * Get all users with calendar connections (admin only)
+     * @param param the request object
+     */
+    public getCalendarUsersHandlerWithHttpInfo(param: CalendarApiGetCalendarUsersHandlerRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<Array<CalendarUser>>> {
+        return this.api.getCalendarUsersHandlerWithHttpInfo( options).toPromise();
+    }
+
+    /**
+     * Get all users with calendar connections (admin only)
+     * @param param the request object
+     */
+    public getCalendarUsersHandler(param: CalendarApiGetCalendarUsersHandlerRequest = {}, options?: ConfigurationOptions): Promise<Array<CalendarUser>> {
+        return this.api.getCalendarUsersHandler( options).toPromise();
+    }
+
+    /**
+     * Get Google Calendar authorization URL
+     * @param param the request object
+     */
+    public getGoogleAuthUrlWithHttpInfo(param: CalendarApiGetGoogleAuthUrlRequest, options?: ConfigurationOptions): Promise<HttpInfo<GoogleAuthUrl>> {
+        return this.api.getGoogleAuthUrlWithHttpInfo(param.redirectUri,  options).toPromise();
+    }
+
+    /**
+     * Get Google Calendar authorization URL
+     * @param param the request object
+     */
+    public getGoogleAuthUrl(param: CalendarApiGetGoogleAuthUrlRequest, options?: ConfigurationOptions): Promise<GoogleAuthUrl> {
+        return this.api.getGoogleAuthUrl(param.redirectUri,  options).toPromise();
+    }
+
+    /**
+     * Handle Google OAuth callback
+     * @param param the request object
+     */
+    public handleGoogleOAuthCallbackWithHttpInfo(param: CalendarApiHandleGoogleOAuthCallbackRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+        return this.api.handleGoogleOAuthCallbackWithHttpInfo(param.code, param.state, param.scope,  options).toPromise();
+    }
+
+    /**
+     * Handle Google OAuth callback
+     * @param param the request object
+     */
+    public handleGoogleOAuthCallback(param: CalendarApiHandleGoogleOAuthCallbackRequest, options?: ConfigurationOptions): Promise<void> {
+        return this.api.handleGoogleOAuthCallback(param.code, param.state, param.scope,  options).toPromise();
+    }
+
+    /**
+     * Refresh Google Calendar token
+     * @param param the request object
+     */
+    public refreshCalendarTokenHandlerWithHttpInfo(param: CalendarApiRefreshCalendarTokenHandlerRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CalendarTokenRefreshResponse>> {
+        return this.api.refreshCalendarTokenHandlerWithHttpInfo( options).toPromise();
+    }
+
+    /**
+     * Refresh Google Calendar token
+     * @param param the request object
+     */
+    public refreshCalendarTokenHandler(param: CalendarApiRefreshCalendarTokenHandlerRequest = {}, options?: ConfigurationOptions): Promise<CalendarTokenRefreshResponse> {
+        return this.api.refreshCalendarTokenHandler( options).toPromise();
     }
 
 }

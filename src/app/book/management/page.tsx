@@ -11,7 +11,11 @@ import { ContactSection } from '@/components/ContactSection'
 import { api } from '@/lib/api-client'
 import clsx from 'clsx'
 import { format } from 'date-fns'
-import { BookingWithDetails, ServiceAddon } from '@/shared/sdk/chronos'
+import {
+  AvailableSlot,
+  BookingWithDetails,
+  ServiceAddon,
+} from '@/shared/sdk/chronos'
 
 export default function BookingManagementPage() {
   return (
@@ -34,7 +38,7 @@ function BookingManagementContent() {
   const [showReschedule, setShowReschedule] = useState(false)
   const [availableDates, setAvailableDates] = useState<Date[]>([])
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
-  const [availableTimes, setAvailableTimes] = useState<string[]>([])
+  const [availableSlots, setAvailableSlots] = useState<AvailableSlot[]>([])
   const [selectedTime, setSelectedTime] = useState<string | null>(null)
   const [successMessage, setSuccessMessage] = useState<string | null>(null)
 
@@ -59,8 +63,8 @@ function BookingManagementContent() {
             bookingWithDetails.service.addons!.includes(addon.id) &&
             !addon.requiresQuote,
         )
-        //@ts-ignore
-        .reduce((sum, addon) => sum + addon['price_cents'], 0)
+
+        .reduce((sum, addon) => sum + addon.price, 0)
     }
 
     return total
@@ -120,11 +124,10 @@ function BookingManagementContent() {
     try {
       const formattedDate = format(date, 'yyyy-MM-dd')
       const result = await api.bookings.checkBookingAvailability({
-        staffId: bookingWithDetails.staffId,
         date: formattedDate,
         serviceId: bookingWithDetails.service.id,
       })
-      setAvailableTimes(result.availableSlots || [])
+      setAvailableSlots(result.availableSlots || [])
     } catch (error) {
       console.error('Failed to check availability:', error)
     }
@@ -338,11 +341,7 @@ function BookingManagementContent() {
                               <span className="text-meet-secondary">
                                 {addon.requiresQuote
                                   ? 'Quote'
-                                  : formatPrice(
-                                      //@ts-ignore
-                                      addon['price_cents'],
-                                      addon.currency,
-                                    )}
+                                  : formatPrice(addon.price, addon.currency)}
                               </span>
                             </li>
                           ))}
@@ -444,32 +443,32 @@ function BookingManagementContent() {
                       </div>
 
                       {/* Time Selection */}
-                      {selectedDate && availableTimes.length > 0 && (
+                      {selectedDate && availableSlots.length > 0 && (
                         <div className="mb-6">
                           <p className="mb-2 text-sm text-meet-secondary/70">
                             Select a time:
                           </p>
                           <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
-                            {availableTimes.map((time) => (
+                            {availableSlots.map((slots) => (
                               <button
-                                key={time}
-                                onClick={() => setSelectedTime(time)}
+                                key={slots.time}
+                                onClick={() => setSelectedTime(slots.time)}
                                 disabled={isProcessing}
                                 className={clsx(
                                   'rounded-lg border p-2 text-center transition-all',
-                                  selectedTime === time
+                                  selectedTime === slots.time
                                     ? 'border-meet-secondary bg-meet-secondary text-white'
                                     : 'border-gray-200 hover:border-meet-secondary',
                                 )}
                               >
-                                {time.substring(0, 5)}
+                                {slots.time.substring(0, 5)}
                               </button>
                             ))}
                           </div>
                         </div>
                       )}
 
-                      {selectedDate && availableTimes.length === 0 && (
+                      {selectedDate && availableSlots.length === 0 && (
                         <p className="mb-6 text-center text-meet-secondary/60">
                           No available times for this date.
                         </p>

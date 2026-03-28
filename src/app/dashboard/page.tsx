@@ -14,10 +14,12 @@ import { format } from 'date-fns'
 import {
   BookingResponse,
   BookingWithDetails,
+  CalendarConnectionStatus,
   ServiceAddon,
 } from '@/shared/sdk/chronos'
 import { SearchIcon } from '@/components/Icons'
 import { useAuth } from '@/components/AuthProvider'
+import { CalendarConnect } from '@/components/CalendarConnect'
 
 interface User {
   id: number
@@ -45,6 +47,9 @@ export default function DashboardPage() {
     useState<BookingResponse | null>(null)
   const [selectedBookingWithDetails, setSelectedBookingWithDetails] =
     useState<BookingWithDetails | null>(null)
+  const [calendarStatus, setCalendarStatus] =
+    useState<CalendarConnectionStatus | null>(null)
+  const [isDisconnecting, setIsDisconnecting] = useState(false)
 
   // Addons state - now comes from the booking response directly
   const [bookingAddons, setBookingAddons] = useState<ServiceAddon[]>([])
@@ -62,8 +67,46 @@ export default function DashboardPage() {
     }
     if (user) {
       fetchBookings()
+      fetchCalendarStatus()
     }
   }, [user, authLoading, selectedDate, filterStatus, allBookings])
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const calendarStatus = params.get('calendar')
+
+    if (calendarStatus === 'connected') {
+      // Refresh calendar status
+      fetchCalendarStatus()
+      // Clear the URL parameter
+      window.history.replaceState({}, '', window.location.pathname)
+      // Optionally show a success message
+      console.log('Calendar connected successfully!')
+    }
+  }, [])
+
+  const handleDisconnectCalendar = async () => {
+    if (
+      !confirm(
+        'Are you sure you want to disconnect your Google Calendar? Your existing calendar events will not be deleted.',
+      )
+    ) {
+      return
+    }
+
+    setIsDisconnecting(true)
+    try {
+      await api.calendar.disconnectCalendar()
+      await fetchCalendarStatus()
+      // Show success message (you might want to add a toast notification)
+      console.log('Calendar disconnected successfully')
+    } catch (error) {
+      console.error('Failed to disconnect calendar:', error)
+      alert('Failed to disconnect calendar. Please try again.')
+    } finally {
+      setIsDisconnecting(false)
+    }
+  }
 
   // Parse addons from the selected booking when modal opens
   useEffect(() => {
@@ -138,6 +181,15 @@ export default function DashboardPage() {
       console.error('Failed to fetch bookings:', error)
     } finally {
       setIsLoading(false)
+    }
+  }
+
+  const fetchCalendarStatus = async () => {
+    try {
+      const status = await api.calendar.getCalendarStatus()
+      setCalendarStatus(status)
+    } catch (error) {
+      console.error('Failed to fetch calendar status:', error)
     }
   }
 
@@ -581,8 +633,8 @@ export default function DashboardPage() {
             </div>
           )}
 
-          {/* User Info Bar */}
-          <div className="mb-8 mt-24 flex items-center justify-between rounded-lg bg-meet-secondary/5 p-4">
+          {/* User Info Bar with Calendar Integration */}
+          <div className="mb-8 mt-24 flex flex-wrap items-center justify-between gap-4 rounded-lg bg-meet-secondary/5 p-4">
             <div>
               <span className="text-sm text-meet-secondary/70">
                 Logged in as
@@ -591,6 +643,37 @@ export default function DashboardPage() {
                 {user.name} ({user.role})
               </p>
             </div>
+
+            {/* Calendar Integration for Staff and Admin */}
+            {(user.role === 'staff' || user.role === 'admin') && (
+              <div className="flex items-center gap-4">
+                {calendarStatus?.connected ? (
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2">
+                      <div className="h-2 w-2 rounded-full bg-green-500"></div>
+                      <span className="text-sm text-meet-secondary">
+                        Google Calendar Connected
+                      </span>
+                      {calendarStatus.expired && (
+                        <span className="text-xs text-yellow-600">
+                          (Token expired - reconnect to refresh)
+                        </span>
+                      )}
+                    </div>
+                    <Button
+                      onClick={handleDisconnectCalendar}
+                      disabled={isDisconnecting}
+                      className="bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-600"
+                    >
+                      {isDisconnecting ? 'Disconnecting...' : 'Disconnect'}
+                    </Button>
+                  </div>
+                ) : (
+                  <CalendarConnect />
+                )}
+              </div>
+            )}
+
             <Button
               onClick={handleLogout}
               className="bg-gray-200 text-meet-primary hover:bg-gray-300"

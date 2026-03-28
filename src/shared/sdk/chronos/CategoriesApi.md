@@ -57,7 +57,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+[tenant_id](README.md#tenant_id), [api_key](README.md#api_key)
 
 ### HTTP request headers
 
@@ -111,7 +111,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+[tenant_id](README.md#tenant_id), [api_key](README.md#api_key)
 
 ### HTTP request headers
 
@@ -158,7 +158,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+[tenant_id](README.md#tenant_id), [api_key](README.md#api_key)
 
 ### HTTP request headers
 
@@ -255,7 +255,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+[tenant_id](README.md#tenant_id), [api_key](README.md#api_key)
 
 ### HTTP request headers
 
@@ -301,7 +301,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+[tenant_id](README.md#tenant_id), [api_key](README.md#api_key)
 
 ### HTTP request headers
 
@@ -357,7 +357,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+[tenant_id](README.md#tenant_id), [api_key](README.md#api_key)
 
 ### HTTP request headers
 
@@ -419,7 +419,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+[tenant_id](README.md#tenant_id), [api_key](README.md#api_key)
 
 ### HTTP request headers
 

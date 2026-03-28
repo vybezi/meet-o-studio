@@ -7,12 +7,17 @@ import { Availability } from '../models/Availability';
 import { AvailabilityCheckResponse } from '../models/AvailabilityCheckResponse';
 import { AvailabilityResponse } from '../models/AvailabilityResponse';
 import { AvailabilitySlot } from '../models/AvailabilitySlot';
+import { AvailableSlot } from '../models/AvailableSlot';
 import { Booking } from '../models/Booking';
 import { BookingResponse } from '../models/BookingResponse';
 import { BookingWithDetails } from '../models/BookingWithDetails';
 import { BulkAvailabilityRequest } from '../models/BulkAvailabilityRequest';
 import { BulkServiceRequest } from '../models/BulkServiceRequest';
 import { BulkServiceResponse } from '../models/BulkServiceResponse';
+import { CalendarConnectionResponse } from '../models/CalendarConnectionResponse';
+import { CalendarConnectionStatus } from '../models/CalendarConnectionStatus';
+import { CalendarTokenRefreshResponse } from '../models/CalendarTokenRefreshResponse';
+import { CalendarUser } from '../models/CalendarUser';
 import { Category } from '../models/Category';
 import { CategoryWithServices } from '../models/CategoryWithServices';
 import { ChangePasswordRequest } from '../models/ChangePasswordRequest';
@@ -25,9 +30,12 @@ import { CreateNewCategoryRequest } from '../models/CreateNewCategoryRequest';
 import { CreateNewServiceRequest } from '../models/CreateNewServiceRequest';
 import { CreateNewUserRequest } from '../models/CreateNewUserRequest';
 import { GenerateSlotsRequest } from '../models/GenerateSlotsRequest';
+import { GoogleAuthUrl } from '../models/GoogleAuthUrl';
+import { GoogleOAuthCallback } from '../models/GoogleOAuthCallback';
 import { LoginRequest } from '../models/LoginRequest';
 import { LoginResponse } from '../models/LoginResponse';
 import { MagicLinkResponse } from '../models/MagicLinkResponse';
+import { NewAvailability } from '../models/NewAvailability';
 import { NewBooking } from '../models/NewBooking';
 import { NewCategory } from '../models/NewCategory';
 import { NewService } from '../models/NewService';
@@ -1265,6 +1273,212 @@ export class ObservableBookingsApi {
      */
     public updateBookingStatus(id: number, updateStatusRequest: UpdateStatusRequest, _options?: ConfigurationOptions): Observable<BookingResponse> {
         return this.updateBookingStatusWithHttpInfo(id, updateStatusRequest, _options).pipe(map((apiResponse: HttpInfo<BookingResponse>) => apiResponse.data));
+    }
+
+}
+
+import { CalendarApiRequestFactory, CalendarApiResponseProcessor} from "../apis/CalendarApi";
+export class ObservableCalendarApi {
+    private requestFactory: CalendarApiRequestFactory;
+    private responseProcessor: CalendarApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: CalendarApiRequestFactory,
+        responseProcessor?: CalendarApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new CalendarApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new CalendarApiResponseProcessor();
+    }
+
+    /**
+     * Disconnect Google Calendar
+     */
+    public disconnectCalendarWithHttpInfo(_options?: ConfigurationOptions): Observable<HttpInfo<CalendarConnectionResponse>> {
+        const _config = mergeConfiguration(this.configuration, _options);
+
+        const requestContextPromise = this.requestFactory.disconnectCalendar(_config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of _config.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => _config.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of _config.middleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.disconnectCalendarWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Disconnect Google Calendar
+     */
+    public disconnectCalendar(_options?: ConfigurationOptions): Observable<CalendarConnectionResponse> {
+        return this.disconnectCalendarWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<CalendarConnectionResponse>) => apiResponse.data));
+    }
+
+    /**
+     * Check if Google Calendar is connected
+     */
+    public getCalendarStatusWithHttpInfo(_options?: ConfigurationOptions): Observable<HttpInfo<CalendarConnectionStatus>> {
+        const _config = mergeConfiguration(this.configuration, _options);
+
+        const requestContextPromise = this.requestFactory.getCalendarStatus(_config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of _config.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => _config.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of _config.middleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getCalendarStatusWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Check if Google Calendar is connected
+     */
+    public getCalendarStatus(_options?: ConfigurationOptions): Observable<CalendarConnectionStatus> {
+        return this.getCalendarStatusWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<CalendarConnectionStatus>) => apiResponse.data));
+    }
+
+    /**
+     * Get all users with calendar connections (admin only)
+     */
+    public getCalendarUsersHandlerWithHttpInfo(_options?: ConfigurationOptions): Observable<HttpInfo<Array<CalendarUser>>> {
+        const _config = mergeConfiguration(this.configuration, _options);
+
+        const requestContextPromise = this.requestFactory.getCalendarUsersHandler(_config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of _config.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => _config.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of _config.middleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getCalendarUsersHandlerWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Get all users with calendar connections (admin only)
+     */
+    public getCalendarUsersHandler(_options?: ConfigurationOptions): Observable<Array<CalendarUser>> {
+        return this.getCalendarUsersHandlerWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<Array<CalendarUser>>) => apiResponse.data));
+    }
+
+    /**
+     * Get Google Calendar authorization URL
+     * @param redirectUri Frontend URL to redirect back to after OAuth
+     */
+    public getGoogleAuthUrlWithHttpInfo(redirectUri: string, _options?: ConfigurationOptions): Observable<HttpInfo<GoogleAuthUrl>> {
+        const _config = mergeConfiguration(this.configuration, _options);
+
+        const requestContextPromise = this.requestFactory.getGoogleAuthUrl(redirectUri, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of _config.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => _config.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of _config.middleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getGoogleAuthUrlWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Get Google Calendar authorization URL
+     * @param redirectUri Frontend URL to redirect back to after OAuth
+     */
+    public getGoogleAuthUrl(redirectUri: string, _options?: ConfigurationOptions): Observable<GoogleAuthUrl> {
+        return this.getGoogleAuthUrlWithHttpInfo(redirectUri, _options).pipe(map((apiResponse: HttpInfo<GoogleAuthUrl>) => apiResponse.data));
+    }
+
+    /**
+     * Handle Google OAuth callback
+     * @param code Authorization code
+     * @param state State parameter with user, tenant, and redirect info
+     * @param scope Granted scopes
+     */
+    public handleGoogleOAuthCallbackWithHttpInfo(code: string, state: string, scope: string, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
+        const _config = mergeConfiguration(this.configuration, _options);
+
+        const requestContextPromise = this.requestFactory.handleGoogleOAuthCallback(code, state, scope, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of _config.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => _config.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of _config.middleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.handleGoogleOAuthCallbackWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Handle Google OAuth callback
+     * @param code Authorization code
+     * @param state State parameter with user, tenant, and redirect info
+     * @param scope Granted scopes
+     */
+    public handleGoogleOAuthCallback(code: string, state: string, scope: string, _options?: ConfigurationOptions): Observable<void> {
+        return this.handleGoogleOAuthCallbackWithHttpInfo(code, state, scope, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
+    }
+
+    /**
+     * Refresh Google Calendar token
+     */
+    public refreshCalendarTokenHandlerWithHttpInfo(_options?: ConfigurationOptions): Observable<HttpInfo<CalendarTokenRefreshResponse>> {
+        const _config = mergeConfiguration(this.configuration, _options);
+
+        const requestContextPromise = this.requestFactory.refreshCalendarTokenHandler(_config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of _config.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => _config.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of _config.middleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.refreshCalendarTokenHandlerWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Refresh Google Calendar token
+     */
+    public refreshCalendarTokenHandler(_options?: ConfigurationOptions): Observable<CalendarTokenRefreshResponse> {
+        return this.refreshCalendarTokenHandlerWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<CalendarTokenRefreshResponse>) => apiResponse.data));
     }
 
 }

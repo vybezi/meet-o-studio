@@ -2,12 +2,17 @@ export * from '../models/Availability';
 export * from '../models/AvailabilityCheckResponse';
 export * from '../models/AvailabilityResponse';
 export * from '../models/AvailabilitySlot';
+export * from '../models/AvailableSlot';
 export * from '../models/Booking';
 export * from '../models/BookingResponse';
 export * from '../models/BookingWithDetails';
 export * from '../models/BulkAvailabilityRequest';
 export * from '../models/BulkServiceRequest';
 export * from '../models/BulkServiceResponse';
+export * from '../models/CalendarConnectionResponse';
+export * from '../models/CalendarConnectionStatus';
+export * from '../models/CalendarTokenRefreshResponse';
+export * from '../models/CalendarUser';
 export * from '../models/Category';
 export * from '../models/CategoryWithServices';
 export * from '../models/ChangePasswordRequest';
@@ -20,9 +25,12 @@ export * from '../models/CreateNewCategoryRequest';
 export * from '../models/CreateNewServiceRequest';
 export * from '../models/CreateNewUserRequest';
 export * from '../models/GenerateSlotsRequest';
+export * from '../models/GoogleAuthUrl';
+export * from '../models/GoogleOAuthCallback';
 export * from '../models/LoginRequest';
 export * from '../models/LoginResponse';
 export * from '../models/MagicLinkResponse';
+export * from '../models/NewAvailability';
 export * from '../models/NewBooking';
 export * from '../models/NewCategory';
 export * from '../models/NewService';
@@ -54,12 +62,17 @@ import { Availability } from '../models/Availability';
 import { AvailabilityCheckResponse } from '../models/AvailabilityCheckResponse';
 import { AvailabilityResponse } from '../models/AvailabilityResponse';
 import { AvailabilitySlot } from '../models/AvailabilitySlot';
+import { AvailableSlot } from '../models/AvailableSlot';
 import { Booking } from '../models/Booking';
 import { BookingResponse } from '../models/BookingResponse';
 import { BookingWithDetails } from '../models/BookingWithDetails';
 import { BulkAvailabilityRequest } from '../models/BulkAvailabilityRequest';
 import { BulkServiceRequest } from '../models/BulkServiceRequest';
 import { BulkServiceResponse } from '../models/BulkServiceResponse';
+import { CalendarConnectionResponse } from '../models/CalendarConnectionResponse';
+import { CalendarConnectionStatus } from '../models/CalendarConnectionStatus';
+import { CalendarTokenRefreshResponse } from '../models/CalendarTokenRefreshResponse';
+import { CalendarUser } from '../models/CalendarUser';
 import { Category } from '../models/Category';
 import { CategoryWithServices } from '../models/CategoryWithServices';
 import { ChangePasswordRequest } from '../models/ChangePasswordRequest';
@@ -72,9 +85,12 @@ import { CreateNewCategoryRequest } from '../models/CreateNewCategoryRequest';
 import { CreateNewServiceRequest } from '../models/CreateNewServiceRequest';
 import { CreateNewUserRequest } from '../models/CreateNewUserRequest';
 import { GenerateSlotsRequest } from '../models/GenerateSlotsRequest';
+import { GoogleAuthUrl } from '../models/GoogleAuthUrl';
+import { GoogleOAuthCallback } from '../models/GoogleOAuthCallback';
 import { LoginRequest } from '../models/LoginRequest';
 import { LoginResponse } from '../models/LoginResponse';
 import { MagicLinkResponse } from '../models/MagicLinkResponse';
+import { NewAvailability } from '../models/NewAvailability';
 import { NewBooking } from '../models/NewBooking';
 import { NewCategory } from '../models/NewCategory';
 import { NewService } from '../models/NewService';
@@ -122,12 +138,17 @@ let typeMap: {[index: string]: any} = {
     "AvailabilityCheckResponse": AvailabilityCheckResponse,
     "AvailabilityResponse": AvailabilityResponse,
     "AvailabilitySlot": AvailabilitySlot,
+    "AvailableSlot": AvailableSlot,
     "Booking": Booking,
     "BookingResponse": BookingResponse,
     "BookingWithDetails": BookingWithDetails,
     "BulkAvailabilityRequest": BulkAvailabilityRequest,
     "BulkServiceRequest": BulkServiceRequest,
     "BulkServiceResponse": BulkServiceResponse,
+    "CalendarConnectionResponse": CalendarConnectionResponse,
+    "CalendarConnectionStatus": CalendarConnectionStatus,
+    "CalendarTokenRefreshResponse": CalendarTokenRefreshResponse,
+    "CalendarUser": CalendarUser,
     "Category": Category,
     "CategoryWithServices": CategoryWithServices,
     "ChangePasswordRequest": ChangePasswordRequest,
@@ -140,9 +161,12 @@ let typeMap: {[index: string]: any} = {
     "CreateNewServiceRequest": CreateNewServiceRequest,
     "CreateNewUserRequest": CreateNewUserRequest,
     "GenerateSlotsRequest": GenerateSlotsRequest,
+    "GoogleAuthUrl": GoogleAuthUrl,
+    "GoogleOAuthCallback": GoogleOAuthCallback,
     "LoginRequest": LoginRequest,
     "LoginResponse": LoginResponse,
     "MagicLinkResponse": MagicLinkResponse,
+    "NewAvailability": NewAvailability,
     "NewBooking": NewBooking,
     "NewCategory": NewCategory,
     "NewService": NewService,

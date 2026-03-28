@@ -16,6 +16,9 @@ export class UpdateBooking {
     'addons'?: string | null;
     'bookingDate'?: string | null;
     'bookingTime'?: string | null;
+    'calendarEventId'?: string | null;
+    'calendarSynced'?: boolean | null;
+    'calendarSyncedAt'?: Date | null;
     'currency'?: string | null;
     'durationMinutes'?: number | null;
     'guestEmail'?: string | null;
@@ -50,6 +53,24 @@ export class UpdateBooking {
             "baseName": "booking_time",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "calendarEventId",
+            "baseName": "calendar_event_id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "calendarSynced",
+            "baseName": "calendar_synced",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "calendarSyncedAt",
+            "baseName": "calendar_synced_at",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "currency",

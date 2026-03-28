@@ -62,7 +62,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+[tenant_id](README.md#tenant_id), [api_key](README.md#api_key)
 
 ### HTTP request headers
 
@@ -119,7 +119,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[tenant_id](README.md#tenant_id)
 
 ### HTTP request headers
 
@@ -155,7 +155,6 @@ const request: BookingsApiCheckBookingAvailabilityRequest = {
   checkAvailabilityRequest: {
     date: new Date('1970-01-01').toISOString().split('T')[0];,
     serviceId: 1,
-    staffId: 1,
   },
 };
 
@@ -177,7 +176,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+[tenant_id](README.md#tenant_id), [api_key](README.md#api_key)
 
 ### HTTP request headers
 
@@ -231,7 +230,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+[tenant_id](README.md#tenant_id), [api_key](README.md#api_key)
 
 ### HTTP request headers
 
@@ -284,7 +283,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+[tenant_id](README.md#tenant_id), [api_key](README.md#api_key)
 
 ### HTTP request headers
 
@@ -332,6 +331,7 @@ const request: BookingsApiCreateBookingRequest = {
     bookingDate: new Date('1970-01-01').toISOString().split('T')[0];,
     bookingTime: "bookingTime_example",
     currency: "currency_example",
+    frontendUrl: "frontendUrl_example",
     guestEmail: "guestEmail_example",
     guestName: "guestName_example",
     guestPhone: "guestPhone_example",
@@ -416,7 +416,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+[tenant_id](README.md#tenant_id), [api_key](README.md#api_key)
 
 ### HTTP request headers
 
@@ -487,7 +487,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+[tenant_id](README.md#tenant_id), [api_key](README.md#api_key)
 
 ### HTTP request headers
 
@@ -539,7 +539,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+[tenant_id](README.md#tenant_id), [api_key](README.md#api_key)
 
 ### HTTP request headers
 
@@ -646,7 +646,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+[tenant_id](README.md#tenant_id), [api_key](README.md#api_key)
 
 ### HTTP request headers
 
@@ -699,7 +699,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+[tenant_id](README.md#tenant_id), [api_key](README.md#api_key)
 
 ### HTTP request headers
 
@@ -760,7 +760,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+[tenant_id](README.md#tenant_id), [api_key](README.md#api_key)
 
 ### HTTP request headers
 
@@ -812,7 +812,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+[tenant_id](README.md#tenant_id), [api_key](README.md#api_key)
 
 ### HTTP request headers
 
@@ -864,7 +864,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+[tenant_id](README.md#tenant_id), [api_key](README.md#api_key)
 
 ### HTTP request headers
 
@@ -916,7 +916,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+[tenant_id](README.md#tenant_id), [api_key](README.md#api_key)
 
 ### HTTP request headers
 
@@ -975,7 +975,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[tenant_id](README.md#tenant_id)
 
 ### HTTP request headers
 
@@ -1015,6 +1015,9 @@ const request: BookingsApiUpdateBookingRequest = {
     addons: "addons_example",
     bookingDate: new Date('1970-01-01').toISOString().split('T')[0];,
     bookingTime: "bookingTime_example",
+    calendarEventId: "calendarEventId_example",
+    calendarSynced: true,
+    calendarSyncedAt: new Date('1970-01-01T00:00:00.00Z'),
     currency: "currency_example",
     durationMinutes: 1,
     guestEmail: "guestEmail_example",
@@ -1048,7 +1051,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+[tenant_id](README.md#tenant_id), [api_key](README.md#api_key)
 
 ### HTTP request headers
 
@@ -1107,7 +1110,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+[tenant_id](README.md#tenant_id), [api_key](README.md#api_key)
 
 ### HTTP request headers
 

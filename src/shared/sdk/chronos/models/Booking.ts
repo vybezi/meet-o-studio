@@ -16,6 +16,9 @@ export class Booking {
     'addons'?: string | null;
     'bookingDate': string;
     'bookingTime': string;
+    'calendarEventId'?: string | null;
+    'calendarSynced': boolean;
+    'calendarSyncedAt'?: Date | null;
     'createdAt': Date;
     'currency': string;
     'durationMinutes': number;
@@ -54,6 +57,24 @@ export class Booking {
             "baseName": "booking_time",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "calendarEventId",
+            "baseName": "calendar_event_id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "calendarSynced",
+            "baseName": "calendar_synced",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "calendarSyncedAt",
+            "baseName": "calendar_synced_at",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "createdAt",

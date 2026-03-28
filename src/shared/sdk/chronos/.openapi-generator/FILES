@@ -3,6 +3,7 @@
 AuthApi.md
 AvailabilityApi.md
 BookingsApi.md
+CalendarApi.md
 CategoriesApi.md
 README.md
 ServicesApi.md
@@ -11,6 +12,7 @@ UsersApi.md
 apis/AuthApi.ts
 apis/AvailabilityApi.ts
 apis/BookingsApi.ts
+apis/CalendarApi.ts
 apis/CategoriesApi.ts
 apis/ServicesApi.ts
 apis/TenantsApi.ts
@@ -28,12 +30,17 @@ models/Availability.ts
 models/AvailabilityCheckResponse.ts
 models/AvailabilityResponse.ts
 models/AvailabilitySlot.ts
+models/AvailableSlot.ts
 models/Booking.ts
 models/BookingResponse.ts
 models/BookingWithDetails.ts
 models/BulkAvailabilityRequest.ts
 models/BulkServiceRequest.ts
 models/BulkServiceResponse.ts
+models/CalendarConnectionResponse.ts
+models/CalendarConnectionStatus.ts
+models/CalendarTokenRefreshResponse.ts
+models/CalendarUser.ts
 models/Category.ts
 models/CategoryWithServices.ts
 models/ChangePasswordRequest.ts
@@ -46,9 +53,12 @@ models/CreateNewCategoryRequest.ts
 models/CreateNewServiceRequest.ts
 models/CreateNewUserRequest.ts
 models/GenerateSlotsRequest.ts
+models/GoogleAuthUrl.ts
+models/GoogleOAuthCallback.ts
 models/LoginRequest.ts
 models/LoginResponse.ts
 models/MagicLinkResponse.ts
+models/NewAvailability.ts
 models/NewBooking.ts
 models/NewCategory.ts
 models/NewService.ts

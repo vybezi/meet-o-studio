@@ -15,7 +15,6 @@ import { HttpFile } from '../http/http';
 export class CheckAvailabilityRequest {
     'date': string;
     'serviceId': number;
-    'staffId': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -31,12 +30,6 @@ export class CheckAvailabilityRequest {
         {
             "name": "serviceId",
             "baseName": "service_id",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "staffId",
-            "baseName": "staff_id",
             "type": "number",
             "format": "int32"
         }    ];

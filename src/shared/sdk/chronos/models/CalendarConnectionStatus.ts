@@ -10,13 +10,15 @@
  * Do not edit the class manually.
  */
 
-import { AvailableSlot } from '../models/AvailableSlot';
 import { HttpFile } from '../http/http';
 
-export class AvailabilityResponse {
-    'available': boolean;
-    'availableSlots': Array<AvailableSlot>;
+export class CalendarConnectionStatus {
+    'connected': boolean;
+    'expired'?: boolean | null;
+    'expiresAt'?: Date | null;
+    'lastRefreshedAt'?: Date | null;
     'message'?: string | null;
+    'userId': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -24,26 +26,44 @@ export class AvailabilityResponse {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "available",
-            "baseName": "available",
+            "name": "connected",
+            "baseName": "connected",
             "type": "boolean",
             "format": ""
         },
         {
-            "name": "availableSlots",
-            "baseName": "available_slots",
-            "type": "Array<AvailableSlot>",
+            "name": "expired",
+            "baseName": "expired",
+            "type": "boolean",
             "format": ""
+        },
+        {
+            "name": "expiresAt",
+            "baseName": "expires_at",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "lastRefreshedAt",
+            "baseName": "last_refreshed_at",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "message",
             "baseName": "message",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "userId",
+            "baseName": "user_id",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {
-        return AvailabilityResponse.attributeTypeMap;
+        return CalendarConnectionStatus.attributeTypeMap;
     }
 
     public constructor() {

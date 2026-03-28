@@ -10,13 +10,12 @@
  * Do not edit the class manually.
  */
 
-import { AvailableSlot } from '../models/AvailableSlot';
 import { HttpFile } from '../http/http';
 
-export class AvailabilityResponse {
-    'available': boolean;
-    'availableSlots': Array<AvailableSlot>;
-    'message'?: string | null;
+export class CalendarTokenRefreshResponse {
+    'expiresAt': Date;
+    'message': string;
+    'userId': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -24,26 +23,26 @@ export class AvailabilityResponse {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "available",
-            "baseName": "available",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "availableSlots",
-            "baseName": "available_slots",
-            "type": "Array<AvailableSlot>",
-            "format": ""
+            "name": "expiresAt",
+            "baseName": "expires_at",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "message",
             "baseName": "message",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "userId",
+            "baseName": "user_id",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {
-        return AvailabilityResponse.attributeTypeMap;
+        return CalendarTokenRefreshResponse.attributeTypeMap;
     }
 
     public constructor() {

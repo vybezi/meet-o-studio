@@ -10,7 +10,7 @@ import { PageIntro } from '@/components/PageIntro'
 import { ContactSection } from '@/components/ContactSection'
 import { api } from '@/lib/api-client'
 import { Availability, User } from '@/shared/sdk/chronos'
-import { format } from 'util'
+import { format } from 'date-fns'
 import { ArrowIcon, PlusIcon, TrashIcon } from '@/components/Icons'
 
 const DAYS_OF_WEEK = [
@@ -40,6 +40,11 @@ export default function AvailabilityManagementPage() {
   })
 
   useEffect(() => {
+    const token = localStorage.getItem('auth_token')
+    if (!token) {
+      router.push('/auth')
+      return
+    }
     fetchData()
   }, [])
 

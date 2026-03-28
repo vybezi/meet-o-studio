@@ -11,6 +11,7 @@ import {
   TenantsApi,
   UsersApi,
   AuthApi,
+  CalendarApi,
 } from '@/shared/sdk/chronos'
 
 // Get tenant ID from environment or cookie
@@ -20,7 +21,8 @@ export const getTenantId = (): string => {
 
 // Get base URL from environment
 export const getBaseUrl = (): string => {
-  return process.env.NEXT_PUBLIC_API_URL || 'https://chronos-api.silascoley.com'
+  // return process.env.NEXT_PUBLIC_API_URL || 'https://chronos-api.silascoley.com'
+  return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'
 }
 
 // Get auth token from localStorage
@@ -75,7 +77,10 @@ const createApiConfiguration = (tenantId?: string, customBasePath?: string) => {
             response.httpStatusCode === 401 &&
             typeof window !== 'undefined'
           ) {
-            console.warn('Authentication failed, redirecting to login...')
+            console.log(
+              'Authentication failed, redirecting to login...',
+              response,
+            )
             localStorage.removeItem('auth_token')
             localStorage.removeItem('user_role')
             localStorage.removeItem('tenant_id')
@@ -103,6 +108,7 @@ export const api = {
   users: new UsersApi(defaultConfig),
   tenants: new TenantsApi(defaultConfig),
   auth: new AuthApi(defaultConfig),
+  calendar: new CalendarApi(defaultConfig),
 }
 
 // For creating APIs with custom tenant ID

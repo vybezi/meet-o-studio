@@ -10,13 +10,10 @@
  * Do not edit the class manually.
  */
 
-import { AvailableSlot } from '../models/AvailableSlot';
 import { HttpFile } from '../http/http';
 
-export class AvailabilityResponse {
-    'available': boolean;
-    'availableSlots': Array<AvailableSlot>;
-    'message'?: string | null;
+export class GoogleAuthUrl {
+    'url': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -24,26 +21,14 @@ export class AvailabilityResponse {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "available",
-            "baseName": "available",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "availableSlots",
-            "baseName": "available_slots",
-            "type": "Array<AvailableSlot>",
-            "format": ""
-        },
-        {
-            "name": "message",
-            "baseName": "message",
+            "name": "url",
+            "baseName": "url",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return AvailabilityResponse.attributeTypeMap;
+        return GoogleAuthUrl.attributeTypeMap;
     }
 
     public constructor() {

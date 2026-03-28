@@ -36,6 +36,11 @@ export default function StaffManagementPage() {
   })
 
   useEffect(() => {
+    const token = localStorage.getItem('auth_token')
+    if (!token) {
+      router.push('/auth')
+      return
+    }
     fetchStaff()
   }, [])
 

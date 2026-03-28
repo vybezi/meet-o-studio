@@ -38,7 +38,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[tenant_id](README.md#tenant_id), [api_key](README.md#api_key)
 
 ### HTTP request headers
 
@@ -94,7 +94,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[tenant_id](README.md#tenant_id)
 
 ### HTTP request headers
 

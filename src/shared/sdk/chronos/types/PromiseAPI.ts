@@ -6,12 +6,17 @@ import { Availability } from '../models/Availability';
 import { AvailabilityCheckResponse } from '../models/AvailabilityCheckResponse';
 import { AvailabilityResponse } from '../models/AvailabilityResponse';
 import { AvailabilitySlot } from '../models/AvailabilitySlot';
+import { AvailableSlot } from '../models/AvailableSlot';
 import { Booking } from '../models/Booking';
 import { BookingResponse } from '../models/BookingResponse';
 import { BookingWithDetails } from '../models/BookingWithDetails';
 import { BulkAvailabilityRequest } from '../models/BulkAvailabilityRequest';
 import { BulkServiceRequest } from '../models/BulkServiceRequest';
 import { BulkServiceResponse } from '../models/BulkServiceResponse';
+import { CalendarConnectionResponse } from '../models/CalendarConnectionResponse';
+import { CalendarConnectionStatus } from '../models/CalendarConnectionStatus';
+import { CalendarTokenRefreshResponse } from '../models/CalendarTokenRefreshResponse';
+import { CalendarUser } from '../models/CalendarUser';
 import { Category } from '../models/Category';
 import { CategoryWithServices } from '../models/CategoryWithServices';
 import { ChangePasswordRequest } from '../models/ChangePasswordRequest';
@@ -24,9 +29,12 @@ import { CreateNewCategoryRequest } from '../models/CreateNewCategoryRequest';
 import { CreateNewServiceRequest } from '../models/CreateNewServiceRequest';
 import { CreateNewUserRequest } from '../models/CreateNewUserRequest';
 import { GenerateSlotsRequest } from '../models/GenerateSlotsRequest';
+import { GoogleAuthUrl } from '../models/GoogleAuthUrl';
+import { GoogleOAuthCallback } from '../models/GoogleOAuthCallback';
 import { LoginRequest } from '../models/LoginRequest';
 import { LoginResponse } from '../models/LoginResponse';
 import { MagicLinkResponse } from '../models/MagicLinkResponse';
+import { NewAvailability } from '../models/NewAvailability';
 import { NewBooking } from '../models/NewBooking';
 import { NewCategory } from '../models/NewCategory';
 import { NewService } from '../models/NewService';
@@ -842,6 +850,141 @@ export class PromiseBookingsApi {
     public updateBookingStatus(id: number, updateStatusRequest: UpdateStatusRequest, _options?: PromiseConfigurationOptions): Promise<BookingResponse> {
         const observableOptions = wrapOptions(_options);
         const result = this.api.updateBookingStatus(id, updateStatusRequest, observableOptions);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
+import { ObservableCalendarApi } from './ObservableAPI';
+
+import { CalendarApiRequestFactory, CalendarApiResponseProcessor} from "../apis/CalendarApi";
+export class PromiseCalendarApi {
+    private api: ObservableCalendarApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: CalendarApiRequestFactory,
+        responseProcessor?: CalendarApiResponseProcessor
+    ) {
+        this.api = new ObservableCalendarApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Disconnect Google Calendar
+     */
+    public disconnectCalendarWithHttpInfo(_options?: PromiseConfigurationOptions): Promise<HttpInfo<CalendarConnectionResponse>> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.disconnectCalendarWithHttpInfo(observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Disconnect Google Calendar
+     */
+    public disconnectCalendar(_options?: PromiseConfigurationOptions): Promise<CalendarConnectionResponse> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.disconnectCalendar(observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Check if Google Calendar is connected
+     */
+    public getCalendarStatusWithHttpInfo(_options?: PromiseConfigurationOptions): Promise<HttpInfo<CalendarConnectionStatus>> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.getCalendarStatusWithHttpInfo(observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Check if Google Calendar is connected
+     */
+    public getCalendarStatus(_options?: PromiseConfigurationOptions): Promise<CalendarConnectionStatus> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.getCalendarStatus(observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Get all users with calendar connections (admin only)
+     */
+    public getCalendarUsersHandlerWithHttpInfo(_options?: PromiseConfigurationOptions): Promise<HttpInfo<Array<CalendarUser>>> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.getCalendarUsersHandlerWithHttpInfo(observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Get all users with calendar connections (admin only)
+     */
+    public getCalendarUsersHandler(_options?: PromiseConfigurationOptions): Promise<Array<CalendarUser>> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.getCalendarUsersHandler(observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Get Google Calendar authorization URL
+     * @param redirectUri Frontend URL to redirect back to after OAuth
+     */
+    public getGoogleAuthUrlWithHttpInfo(redirectUri: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<GoogleAuthUrl>> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.getGoogleAuthUrlWithHttpInfo(redirectUri, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Get Google Calendar authorization URL
+     * @param redirectUri Frontend URL to redirect back to after OAuth
+     */
+    public getGoogleAuthUrl(redirectUri: string, _options?: PromiseConfigurationOptions): Promise<GoogleAuthUrl> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.getGoogleAuthUrl(redirectUri, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Handle Google OAuth callback
+     * @param code Authorization code
+     * @param state State parameter with user, tenant, and redirect info
+     * @param scope Granted scopes
+     */
+    public handleGoogleOAuthCallbackWithHttpInfo(code: string, state: string, scope: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.handleGoogleOAuthCallbackWithHttpInfo(code, state, scope, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Handle Google OAuth callback
+     * @param code Authorization code
+     * @param state State parameter with user, tenant, and redirect info
+     * @param scope Granted scopes
+     */
+    public handleGoogleOAuthCallback(code: string, state: string, scope: string, _options?: PromiseConfigurationOptions): Promise<void> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.handleGoogleOAuthCallback(code, state, scope, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Refresh Google Calendar token
+     */
+    public refreshCalendarTokenHandlerWithHttpInfo(_options?: PromiseConfigurationOptions): Promise<HttpInfo<CalendarTokenRefreshResponse>> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.refreshCalendarTokenHandlerWithHttpInfo(observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Refresh Google Calendar token
+     */
+    public refreshCalendarTokenHandler(_options?: PromiseConfigurationOptions): Promise<CalendarTokenRefreshResponse> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.refreshCalendarTokenHandler(observableOptions);
         return result.toPromise();
     }
 

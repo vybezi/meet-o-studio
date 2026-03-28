@@ -3,9 +3,10 @@
 import { Border } from '@/components/Border'
 import { Button } from '@/components/Button'
 import { FadeIn } from '@/components/FadeIn'
-import { api } from '@/lib/api-client'
+import { api, getBaseUrl } from '@/lib/api-client'
 import {
   AvailabilityResponse,
+  AvailableSlot,
   CategoryWithServices,
   Service,
   ServiceAddon,
@@ -297,10 +298,14 @@ function DateButton({
 
 function TimeButton({
   time,
+  staffName,
+  staffId,
   selected,
   onClick,
 }: {
   time: string
+  staffName: string
+  staffId: number
   selected: boolean
   onClick: () => void
 }) {
@@ -309,13 +314,21 @@ function TimeButton({
       type="button"
       onClick={onClick}
       className={clsx(
-        'rounded-lg border p-3 text-center transition-all',
+        'flex flex-col items-center rounded-lg border p-3 text-center transition-all',
         selected
           ? 'border-meet-secondary bg-meet-secondary text-white'
           : 'border-gray-200 hover:border-meet-secondary hover:bg-meet-secondary/5',
       )}
     >
-      {time.substring(0, 5)}
+      <span className="text-lg font-semibold">{time.substring(0, 5)}</span>
+      <span
+        className={clsx(
+          'mt-1 text-xs',
+          selected ? 'text-white/80' : 'text-meet-secondary/60',
+        )}
+      >
+        With {staffName}
+      </span>
     </button>
   )
 }
@@ -334,9 +347,13 @@ export function BookingForm() {
   const [selectedAddons, setSelectedAddons] = useState<ServiceAddon[]>([])
   const [availableDates, setAvailableDates] = useState<Date[]>([])
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
-  const [availableTimes, setAvailableTimes] = useState<string[]>([])
   const [selectedTime, setSelectedTime] = useState<string | null>(null)
   const [staffName, setStaffName] = useState<string>('Sarah Johnson')
+  const [availableSlots, setAvailableSlots] = useState<AvailableSlot[]>([])
+  const [selectedStaffId, setSelectedStaffId] = useState<number | null>(null)
+  const [selectedStaffName, setSelectedStaffName] = useState<string | null>(
+    null,
+  )
 
   // Form data
   const [formData, setFormData] = useState({
@@ -392,22 +409,19 @@ export function BookingForm() {
     setIsLoading(true)
     try {
       const formattedDate = date.toISOString().split('T')[0]
-
       const result = await api.bookings.checkBookingAvailability({
-        staffId: 3,
         date: formattedDate,
         serviceId: serviceId,
       })
 
-      setAvailableTimes(result.availableSlots || [])
+      setAvailableSlots(result.availableSlots || [])
     } catch (error) {
       console.error('Availability check failed:', error)
-      setAvailableTimes([])
+      setAvailableSlots([])
     } finally {
       setIsLoading(false)
     }
   }
-
   const sendBookingEmail = async () => {
     try {
       const addonDetails = selectedAddons.map((addon) => ({
@@ -513,9 +527,11 @@ export function BookingForm() {
         }),
       )
 
+      const baseUrl = window.location.origin
+
       // Create booking with addons
       const response = await api.bookings.createBooking({
-        staffId: 3,
+        staffId: selectedStaffId || 1,
         serviceId: selectedService?.id || 0,
         bookingDate: formattedDate || '',
         bookingTime: selectedTime || '',
@@ -526,6 +542,7 @@ export function BookingForm() {
         addons: addonsToSend,
         priceCents: selectedService?.priceCents || 0,
         currency: selectedService?.currency || 'JMD',
+        frontendUrl: baseUrl,
       })
 
       // Store magic link for display
@@ -838,14 +855,23 @@ export function BookingForm() {
                 <div className="py-8 text-center text-meet-secondary/60">
                   Checking availability...
                 </div>
-              ) : availableTimes.length > 0 ? (
+              ) : availableSlots.length > 0 ? (
                 <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
-                  {availableTimes.map((time) => (
+                  {availableSlots.map((slot, index) => (
                     <TimeButton
-                      key={time}
-                      time={time}
-                      selected={selectedTime === time}
-                      onClick={() => handleTimeSelect(time)}
+                      key={`${slot.time}-${slot.staffId}-${index}`}
+                      time={slot.time}
+                      staffName={slot.staffName}
+                      staffId={slot.staffId}
+                      selected={
+                        selectedTime === slot.time &&
+                        selectedStaffId === slot.staffId
+                      }
+                      onClick={() => {
+                        setSelectedTime(slot.time)
+                        setSelectedStaffId(slot.staffId)
+                        setSelectedStaffName(slot.staffName)
+                      }}
                     />
                   ))}
                 </div>
@@ -1029,14 +1055,14 @@ export function BookingForm() {
             Booking Confirmed!
           </h2>
           <p className="mb-4 text-meet-secondary/70">
-            We&apos;ve sent a confirmation email to {formData.email} with all the
-            details.
+            We&apos;ve sent a confirmation email to {formData.email} with all
+            the details.
           </p>
 
           {magicLink && (
             <div className="mx-auto mb-6 max-w-md rounded-lg bg-blue-50 p-4">
               <p className="mb-2 text-sm font-medium text-blue-800">
-                🔗 Save this link to manage your booking:
+                Save this link to manage your booking:
               </p>
               <a
                 href={magicLink}

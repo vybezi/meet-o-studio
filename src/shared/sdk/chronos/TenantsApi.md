@@ -52,7 +52,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+No authorization required
 
 ### HTTP request headers
 
@@ -104,7 +104,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+No authorization required
 
 ### HTTP request headers
 
@@ -151,7 +151,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+No authorization required
 
 ### HTTP request headers
 
@@ -203,7 +203,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+No authorization required
 
 ### HTTP request headers
 
@@ -265,7 +265,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+No authorization required
 
 ### HTTP request headers
 
@@ -320,7 +320,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+No authorization required
 
 ### HTTP request headers
 
@@ -387,7 +387,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[tenant_id](README.md#tenant_id)
+No authorization required
 
 ### HTTP request headers
 
