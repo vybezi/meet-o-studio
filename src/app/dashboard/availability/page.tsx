@@ -30,7 +30,7 @@ export default function AvailabilityManagementPage() {
   const [availability, setAvailability] = useState<Availability[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [showModal, setShowModal] = useState(false)
-  const [selectedStaff, setSelectedStaff] = useState<number | ''>('')
+  const [selectedStaff, setSelectedStaff] = useState<number | null>(null)
   const [formData, setFormData] = useState({
     staffId: '',
     type: 'recurring' as 'recurring' | 'specific',
@@ -187,8 +187,8 @@ export default function AvailabilityManagementPage() {
               Filter by Staff
             </label>
             <select
-              value={selectedStaff}
-              onChange={(e) => setSelectedStaff(e.target.value as number | '')}
+              value={selectedStaff!}
+              onChange={(e) => setSelectedStaff(parseInt(e.target.value))}
               className="w-full max-w-xs rounded-lg border border-gray-200 p-2 focus:border-meet-secondary focus:outline-none"
             >
               <option value="">All Staff</option>

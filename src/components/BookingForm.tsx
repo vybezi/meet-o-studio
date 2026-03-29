@@ -416,8 +416,11 @@ export function BookingForm() {
         date: formattedDate,
         serviceId: serviceId,
       })
+      const sortedSlots = (result.availableSlots || []).sort((a, b) =>
+        a.time.localeCompare(b.time),
+      )
 
-      setAvailableSlots(result.availableSlots || [])
+      setAvailableSlots(sortedSlots)
     } catch (error) {
       console.error('Availability check failed:', error)
       setAvailableSlots([])
