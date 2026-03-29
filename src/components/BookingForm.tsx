@@ -616,10 +616,10 @@ export function BookingForm() {
         )}
       >
         {/* Service Header */}
-        <div className="p-6">
-          <div className="flex gap-6">
+        <div className="p-4 sm:p-6">
+          <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
             {service.imageUrl && (
-              <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100">
+              <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100 sm:h-24 sm:w-24">
                 <img
                   src={service.imageUrl}
                   alt={service.name}
@@ -632,9 +632,9 @@ export function BookingForm() {
             )}
 
             <div className="flex-1">
-              <div className="flex items-start justify-between">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                 <div>
-                  <h3 className="text-lg font-semibold text-meet-primary">
+                  <h3 className="text-base font-semibold text-meet-primary sm:text-lg">
                     {service.name}
                   </h3>
                   {service.description && (
@@ -642,7 +642,7 @@ export function BookingForm() {
                       {service.description}
                     </p>
                   )}
-                  <div className="mt-2 flex items-center gap-4 text-sm">
+                  <div className="mt-2 flex flex-wrap items-center gap-3 text-sm sm:gap-4">
                     <span className="flex items-center gap-1 text-meet-secondary/60">
                       <ClockIcon className="h-3 w-3 fill-meet-secondary" />{' '}
                       {service.durationMinutes} min
@@ -656,14 +656,14 @@ export function BookingForm() {
                     )}
                   </div>
                 </div>
-                <div className="text-right">
-                  <div className="text-2xl font-bold text-meet-secondary">
+                <div className="flex items-center gap-3 sm:block sm:text-right">
+                  <div className="text-xl font-bold text-meet-secondary sm:text-2xl">
                     {formatPrice(service.priceCents, service.currency)}
                   </div>
                   <button
                     type="button"
                     onClick={() => setShowDetails(!showDetails)}
-                    className="mt-2 text-sm text-meet-secondary hover:text-meet-primary"
+                    className="text-sm text-meet-secondary hover:text-meet-primary sm:mt-2"
                   >
                     {showDetails ? 'Hide details' : 'View details'}
                   </button>
@@ -698,7 +698,7 @@ export function BookingForm() {
 
         {/* Addons Section */}
         {selected && addons.length > 0 && (
-          <div className="border-t border-meet-secondary/20 bg-gray-50 p-6">
+          <div className="border-t border-meet-secondary/20 bg-gray-50 p-4 sm:p-6">
             <h4 className="mb-3 font-medium text-meet-primary">
               Enhance Your Session
             </h4>
@@ -723,7 +723,7 @@ export function BookingForm() {
   return (
     <FadeIn className="w-full">
       {/* Progress Indicator - same as before */}
-      <div className="mb-24 w-full">
+      <div className="mb-12 w-full sm:mb-24">
         <div className="flex w-full items-center justify-between">
           {['Select Service', 'Choose Time', 'Your Details', 'Confirm'].map(
             (label, i) => (
@@ -743,7 +743,7 @@ export function BookingForm() {
                   </div>
                   <p
                     className={clsx(
-                      'mt-2 text-sm',
+                      'mt-2 hidden text-sm sm:block',
                       step === i + 1 ? 'text-meet-secondary' : 'text-gray-400',
                     )}
                   >
@@ -826,7 +826,7 @@ export function BookingForm() {
             <h3 className="mb-3 font-medium text-meet-primary">
               Select a Date
             </h3>
-            <div className="grid grid-cols-4 gap-2 sm:grid-cols-7">
+            <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-7">
               {availableDates.map((date) => (
                 <DateButton
                   key={date.toISOString()}
@@ -856,7 +856,7 @@ export function BookingForm() {
                   Checking availability...
                 </div>
               ) : availableSlots.length > 0 ? (
-                <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
+                <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
                   {availableSlots.map((slot, index) => (
                     <TimeButton
                       key={`${slot.time}-${slot.staffId}-${index}`}
@@ -938,7 +938,7 @@ export function BookingForm() {
             </div>
 
             {/* Enhanced Booking Summary with Addons */}
-            <Border className="mb-6 p-6">
+            <Border className="mb-6 p-4 sm:p-6">
               <h3 className="mb-3 font-semibold text-meet-primary">
                 Booking Summary
               </h3>
@@ -1013,7 +1013,7 @@ export function BookingForm() {
               </div>
             </Border>
 
-            <div className="flex justify-between gap-4">
+            <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-between sm:gap-4">
               <Button type="button" onClick={goBack}>
                 Back
               </Button>
