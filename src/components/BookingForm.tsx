@@ -13,7 +13,7 @@ import {
 } from '@/shared/sdk/chronos'
 import { BaseAPIRequestFactory } from '@/shared/sdk/chronos/apis/baseapi'
 import clsx from 'clsx'
-import { FormEvent, useId, useState, useEffect } from 'react'
+import { FormEvent, useId, useRef, useState, useEffect } from 'react'
 import { ClockIcon, StarIcon } from './Icons'
 import { formatTo12Hour } from '@/lib/format'
 
@@ -338,6 +338,7 @@ function TimeButton({
 
 export function BookingForm() {
   const [step, setStep] = useState(1)
+  const formRef = useRef<HTMLDivElement>(null)
   const [isSuccess, setSuccess] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [magicLink, setMagicLink] = useState<string | null>(null)
@@ -346,6 +347,8 @@ export function BookingForm() {
 
   // Data states
   const [categories, setCategories] = useState<CategoryWithServices[]>([])
+  const [selectedCategory, setSelectedCategory] =
+    useState<CategoryWithServices | null>(null)
   const [selectedService, setSelectedService] = useState<Service | null>(null)
   const [selectedAddons, setSelectedAddons] = useState<ServiceAddon[]>([])
   const [availableDates, setAvailableDates] = useState<Date[]>([])
@@ -379,6 +382,11 @@ export function BookingForm() {
 
     return total
   }
+
+  // Scroll to top of form when step changes
+  useEffect(() => {
+    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, [step])
 
   // Fetch categories on mount
   useEffect(() => {
@@ -558,7 +566,7 @@ export function BookingForm() {
       }
 
       setSuccess(true)
-      setStep(4)
+      setStep(5)
     } catch (error: any) {
       console.error('Booking failed:', error)
       setError(error.message || 'Booking failed. Please try again.')
@@ -725,53 +733,151 @@ export function BookingForm() {
     )
   }
 
+  // Update ServiceCard to pass the full addon object
+  const CategoriesWithServices = ({
+    category,
+    selected,
+    onSelect,
+  }: {
+    category: CategoryWithServices
+    selected: boolean
+    onSelect: () => void
+  }) => {
+    return (
+      <div
+        className={clsx(
+          'overflow-hidden rounded-lg border-2 transition-all',
+          selected ? 'border-meet-secondary' : 'border-gray-200',
+        )}
+      >
+        {/* Service Header */}
+        <div className="p-4 sm:p-6">
+          <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
+            <div className="flex-1">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <h3 className="text-base font-semibold text-meet-primary sm:text-lg">
+                    {category.name}
+                  </h3>
+                  {category.description && (
+                    <p className="mt-1 line-clamp-2 text-sm text-meet-secondary/70">
+                      {category.description}
+                    </p>
+                  )}
+                </div>
+
+                <Button
+                  type="button"
+                  onClick={onSelect}
+                  className={clsx(
+                    'px-6',
+                    selected
+                      ? 'bg-meet-secondary'
+                      : 'bg-gray-200 text-meet-primary hover:bg-gray-300',
+                  )}
+                >
+                  {selected ? 'Selected' : 'Select'}
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   // Update the render section to use ServiceCardWithAddons
   return (
+    <div ref={formRef}>
     <FadeIn className="w-full">
       {/* Progress Indicator - same as before */}
       <div className="mb-12 w-full sm:mb-24">
         <div className="flex w-full items-center justify-between">
-          {['Select Service', 'Choose Time', 'Your Details', 'Confirm'].map(
-            (label, i) => (
-              <div className="flex flex-1 last:flex-none" key={label}>
-                <div className="flex flex-col items-center last:w-auto">
-                  <div
-                    className={clsx(
-                      'flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold',
-                      step > i + 1
-                        ? 'bg-meet-secondary text-white'
-                        : step === i + 1
-                          ? 'bg-meet-secondary text-white ring-4 ring-meet-secondary/20'
-                          : 'bg-gray-100 text-gray-400',
-                    )}
-                  >
-                    {step > i + 1 ? '✓' : i + 1}
-                  </div>
-                  <p
-                    className={clsx(
-                      'mt-2 hidden text-sm sm:block',
-                      step === i + 1 ? 'text-meet-secondary' : 'text-gray-400',
-                    )}
-                  >
-                    {label}
-                  </p>
+          {[
+            'Select Category',
+            'Select Service',
+            'Choose Time',
+            'Your Details',
+            'Confirm',
+          ].map((label, i) => (
+            <div className="flex flex-1 last:flex-none" key={label}>
+              <div className="flex flex-col items-center last:w-auto">
+                <div
+                  className={clsx(
+                    'flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold',
+                    step > i + 1
+                      ? 'bg-meet-secondary text-white'
+                      : step === i + 1
+                        ? 'bg-meet-secondary text-white ring-4 ring-meet-secondary/20'
+                        : 'bg-gray-100 text-gray-400',
+                  )}
+                >
+                  {step > i + 1 ? '✓' : i + 1}
                 </div>
-                {i < 3 && (
-                  <div
-                    className={clsx(
-                      'mx-2 mt-4 h-1 flex-1',
-                      step > i + 1 ? 'bg-meet-secondary' : 'bg-gray-200',
-                    )}
-                  />
-                )}
+                <p
+                  className={clsx(
+                    'mt-2 hidden text-sm sm:block',
+                    step === i + 1 ? 'text-meet-secondary' : 'text-gray-400',
+                  )}
+                >
+                  {label}
+                </p>
               </div>
-            ),
-          )}
+              {i < 4 && (
+                <div
+                  className={clsx(
+                    'mx-2 mt-4 h-1 flex-1',
+                    step > i + 1 ? 'bg-meet-secondary' : 'bg-gray-200',
+                  )}
+                />
+              )}
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Step 1: Service Selection */}
+      {/* Step 1: Category Selection */}
       {step === 1 && (
+        <div>
+          <h2 className="mb-6 font-display text-2xl font-semibold text-meet-primary">
+            Select a Category
+          </h2>
+
+          {categories.length === 0 ? (
+            <p className="py-8 text-center text-meet-secondary/60">
+              Loading categories...
+            </p>
+          ) : (
+            <div className="space-y-8">
+              {categories.map((category) => (
+                <CategoriesWithServices
+                  key={category.id}
+                  selected={selectedCategory?.id === category.id}
+                  onSelect={() => {
+                    selectedCategory?.id === category.id
+                      ? setSelectedCategory(null)
+                      : setSelectedCategory(category)
+                  }}
+                  category={category}
+                />
+              ))}
+            </div>
+          )}
+
+          <div className="mt-8 flex justify-end">
+            <Button
+              disabled={selectedCategory == null}
+              onClick={() => setStep(2)}
+              className="bg-meet-secondary"
+            >
+              Continue
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {/* Step 2: Service Selection */}
+      {step === 2 && (
         <div>
           <h2 className="mb-6 font-display text-2xl font-semibold text-meet-primary">
             Select a Service
@@ -779,34 +885,32 @@ export function BookingForm() {
 
           {categories.length === 0 ? (
             <p className="py-8 text-center text-meet-secondary/60">
-              Loading services...
+              Loading categories...
             </p>
           ) : (
             <div className="space-y-8">
-              {categories.map((category) => (
-                <div key={category.id}>
-                  <h3 className="mb-4 font-display text-xl font-semibold text-meet-primary">
-                    {category.name}
-                  </h3>
-                  <div className="space-y-4">
-                    {category.services.map((service) => (
-                      <ServiceCardWithAddons
-                        key={service.id}
-                        service={service}
-                        selected={selectedService?.id === service.id}
-                        onSelect={() => handleServiceSelect(service)}
-                      />
-                    ))}
-                  </div>
-                </div>
+              {selectedCategory!.services.map((service) => (
+                <ServiceCardWithAddons
+                  key={service.id}
+                  service={service}
+                  selected={selectedService?.id === service.id}
+                  onSelect={() => handleServiceSelect(service)}
+                />
               ))}
             </div>
           )}
 
-          <div className="mt-8 flex justify-end">
+          <div className="mt-8 flex justify-between">
+            <Button
+              type="button"
+              onClick={goBack}
+              className="bg-gray-200 text-meet-primary hover:bg-gray-300"
+            >
+              Back
+            </Button>
             <Button
               disabled={selectedService == null}
-              onClick={() => setStep(2)}
+              onClick={() => setStep(3)}
               className="bg-meet-secondary"
             >
               Continue to Date & Time
@@ -815,8 +919,8 @@ export function BookingForm() {
         </div>
       )}
 
-      {/* Step 2: Date & Time Selection - same as before */}
-      {step === 2 && selectedService && (
+      {/* Step 3: Date & Time Selection - same as before */}
+      {step === 3 && selectedService && (
         <div className="w-full flex-col items-start">
           <div className="mb-6">
             <h2 className="font-display text-2xl font-semibold text-meet-primary">
@@ -897,15 +1001,15 @@ export function BookingForm() {
             >
               Back
             </Button>
-            <Button disabled={selectedTime == null} onClick={() => setStep(3)}>
+            <Button disabled={selectedTime == null} onClick={() => setStep(4)}>
               Next
             </Button>
           </div>
         </div>
       )}
 
-      {/* Step 3: Client Details - update summary to show selected addons */}
-      {step === 3 && selectedService && selectedDate && selectedTime && (
+      {/* Step 4: Client Details - update summary to show selected addons */}
+      {step === 4 && selectedService && selectedDate && selectedTime && (
         <div>
           <h2 className="mb-6 font-display text-2xl font-semibold text-meet-primary">
             Your Information
@@ -1039,8 +1143,8 @@ export function BookingForm() {
         </div>
       )}
 
-      {/* Step 4: Confirmation */}
-      {step === 4 && isSuccess && (
+      {/* Step 5: Confirmation */}
+      {step === 5 && isSuccess && (
         <div className="py-12 text-center">
           <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-green-100">
             <svg
@@ -1090,5 +1194,6 @@ export function BookingForm() {
         </div>
       )}
     </FadeIn>
+    </div>
   )
 }
