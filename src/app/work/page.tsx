@@ -18,7 +18,7 @@ import logoMailSmirk from '@/images/clients/mail-smirk/logo-dark.svg'
 import logoNorthAdventures from '@/images/clients/north-adventures/logo-dark.svg'
 import logoPhobia from '@/images/clients/phobia/logo-dark.svg'
 import logoUnseal from '@/images/clients/unseal/logo-dark.svg'
-import { formatDate } from '@/lib/formatDate'
+import { formatDate } from '@/lib/format'
 import { type CaseStudy, type MDXEntry, loadCaseStudies } from '@/lib/mdx'
 
 function CaseStudies({
@@ -159,14 +159,11 @@ export default async function Work() {
 
       <CaseStudies caseStudies={caseStudies} />
 
-      <Testimonial
-        className="mt-24 sm:mt-32 lg:mt-40"
-      />
+      <Testimonial className="mt-24 sm:mt-32 lg:mt-40" />
 
       <Clients />
 
       <MemberSection />
-      
     </>
   )
 }

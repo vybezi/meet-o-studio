@@ -6,7 +6,7 @@ import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { GridPattern } from '@/components/GridPattern'
 import { SectionIntro } from '@/components/SectionIntro'
-import { formatDate } from '@/lib/formatDate'
+import { formatDate } from '@/lib/format'
 
 function ArrowIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (

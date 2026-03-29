@@ -7,7 +7,7 @@ import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
 import { PageIntro } from '@/components/PageIntro'
-import { formatDate } from '@/lib/formatDate'
+import { formatDate } from '@/lib/format'
 import { loadArticles } from '@/lib/mdx'
 import { MemberSection } from '@/components/MemberSection'
 

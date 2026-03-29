@@ -12,6 +12,7 @@ import { api } from '@/lib/api-client'
 import { Availability, User } from '@/shared/sdk/chronos'
 import { format } from 'date-fns'
 import { ArrowIcon, PlusIcon, TrashIcon } from '@/components/Icons'
+import { formatTo12Hour } from '@/lib/format'
 
 const DAYS_OF_WEEK = [
   { value: 0, label: 'Sunday' },
@@ -134,7 +135,7 @@ export default function AvailabilityManagementPage() {
   }
 
   const formatTime = (time: string) => {
-    return time.substring(0, 5)
+    return formatTo12Hour(time.substring(0, 5))
   }
 
   if (isLoading) {

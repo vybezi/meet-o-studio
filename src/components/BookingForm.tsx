@@ -15,6 +15,7 @@ import { BaseAPIRequestFactory } from '@/shared/sdk/chronos/apis/baseapi'
 import clsx from 'clsx'
 import { FormEvent, useId, useState, useEffect } from 'react'
 import { ClockIcon, StarIcon } from './Icons'
+import { formatTo12Hour } from '@/lib/format'
 
 function TextInput({
   label,
@@ -309,6 +310,8 @@ function TimeButton({
   selected: boolean
   onClick: () => void
 }) {
+  const formattedTime = formatTo12Hour(time)
+
   return (
     <button
       type="button"
@@ -320,7 +323,7 @@ function TimeButton({
           : 'border-gray-200 hover:border-meet-secondary hover:bg-meet-secondary/5',
       )}
     >
-      <span className="text-lg font-semibold">{time.substring(0, 5)}</span>
+      <span className="text-lg font-semibold">{formattedTime}</span>
       <span
         className={clsx(
           'mt-1 text-xs',
